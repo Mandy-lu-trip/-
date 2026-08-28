@@ -535,6 +535,59 @@
   }
   .option-card .option-card { background: var(--paper); }
 
+  /* ---------- Day mini-map ---------- */
+  .day-map-wrap { padding: 4px 22px 18px; }
+  .day-map {
+    height: 260px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--card-raised);
+  }
+  .day-map .leaflet-tile-pane { filter: saturate(0.85) brightness(1.02); }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .day-map .leaflet-tile-pane { filter: saturate(0.7) brightness(0.82) invert(1) hue-rotate(180deg); }
+  }
+  :root[data-theme="dark"] .day-map .leaflet-tile-pane { filter: saturate(0.7) brightness(0.82) invert(1) hue-rotate(180deg); }
+  .map-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    margin-top: 10px;
+    font-size: 11.5px;
+    color: var(--ink-soft);
+  }
+  .map-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .map-legend i {
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+    border: 1.5px solid var(--card-raised);
+    box-shadow: 0 0 0 1px var(--line-strong);
+  }
+  .leaflet-popup-content-wrapper { border-radius: 8px; }
+  .leaflet-popup-content {
+    font-family: "Noto Sans TC", sans-serif;
+    font-size: 12.5px;
+    margin: 8px 10px;
+  }
+  .map-pin {
+    display: block;
+    box-sizing: border-box;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.35);
+  }
+  .map-pin.pin-airport { background: #6b6458; }
+  .map-pin.pin-stay { background: #2B2724; width: 16px; height: 16px; }
+  .map-pin.pin-nature { background: #1B6E62; }
+  .map-pin.pin-cafe { background: #D9701F; }
+  .map-pin.pin-food { background: #A8452A; }
+  .map-pin.pin-culture { background: #5C5473; }
+  .map-pin.pin-other { background: #8A8370; }
+
   /* ---------- Day footnote ---------- */
   .day-note {
     margin: 2px 22px 20px;
@@ -674,6 +727,11 @@
     a, .day-tab, .nav-btn, .bn-btn, .jump-link { transition: opacity 0.15s ease, border-color 0.15s ease, color 0.15s ease; }
   }
 </style>
+<style>
+/* Leaflet 1.9.4 core CSS, inlined (Artifact CSP only allows scripts from CDNs, not stylesheets) */
+.leaflet-pane,.leaflet-tile,.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-tile-container,.leaflet-pane>svg,.leaflet-pane>canvas,.leaflet-zoom-box,.leaflet-image-layer,.leaflet-layer{position:absolute;left:0;top:0}.leaflet-container{overflow:hidden}.leaflet-tile,.leaflet-marker-icon,.leaflet-marker-shadow{-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-user-drag:none}.leaflet-tile::selection{background:transparent}.leaflet-safari .leaflet-tile{image-rendering:-webkit-optimize-contrast}.leaflet-safari .leaflet-tile-container{width:1600px;height:1600px;-webkit-transform-origin:0 0}.leaflet-marker-icon,.leaflet-marker-shadow{display:block}.leaflet-container .leaflet-overlay-pane svg{max-width:none!important;max-height:none!important}.leaflet-container .leaflet-marker-pane img,.leaflet-container .leaflet-shadow-pane img,.leaflet-container .leaflet-tile-pane img,.leaflet-container img.leaflet-image-layer,.leaflet-container .leaflet-tile{max-width:none!important;max-height:none!important;width:auto;padding:0}.leaflet-container img.leaflet-tile{mix-blend-mode:plus-lighter}.leaflet-container.leaflet-touch-zoom{-ms-touch-action:pan-x pan-y;touch-action:pan-x pan-y}.leaflet-container.leaflet-touch-drag{-ms-touch-action:pinch-zoom;touch-action:none;touch-action:pinch-zoom}.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom{-ms-touch-action:none;touch-action:none}.leaflet-container{-webkit-tap-highlight-color:transparent}.leaflet-container a{-webkit-tap-highlight-color:rgba(51,181,229,.4)}.leaflet-tile{filter:inherit;visibility:hidden}.leaflet-tile-loaded{visibility:inherit}.leaflet-zoom-box{width:0;height:0;box-sizing:border-box;z-index:800}.leaflet-overlay-pane svg{-moz-user-select:none}.leaflet-pane{z-index:400}.leaflet-tile-pane{z-index:200}.leaflet-overlay-pane{z-index:400}.leaflet-shadow-pane{z-index:500}.leaflet-marker-pane{z-index:600}.leaflet-tooltip-pane{z-index:650}.leaflet-popup-pane{z-index:700}.leaflet-map-pane canvas{z-index:100}.leaflet-map-pane svg{z-index:200}.leaflet-vml-shape{width:1px;height:1px}.lvml{behavior:url(#default#VML);display:inline-block;position:absolute}.leaflet-control{position:relative;z-index:800;pointer-events:visiblePainted;pointer-events:auto}.leaflet-top,.leaflet-bottom{position:absolute;z-index:1000;pointer-events:none}.leaflet-top{top:0}.leaflet-right{right:0}.leaflet-bottom{bottom:0}.leaflet-left{left:0}.leaflet-control{float:left;clear:both}.leaflet-right .leaflet-control{float:right}.leaflet-top .leaflet-control{margin-top:10px}.leaflet-bottom .leaflet-control{margin-bottom:10px}.leaflet-left .leaflet-control{margin-left:10px}.leaflet-right .leaflet-control{margin-right:10px}.leaflet-fade-anim .leaflet-popup{opacity:0;transition:opacity .2s linear}.leaflet-fade-anim .leaflet-map-pane .leaflet-popup{opacity:1}.leaflet-zoom-animated{transform-origin:0 0}svg.leaflet-zoom-animated{will-change:transform}.leaflet-zoom-anim .leaflet-zoom-animated{transition:transform .25s cubic-bezier(0,0,.25,1)}.leaflet-zoom-anim .leaflet-tile,.leaflet-pan-anim .leaflet-tile{transition:none}.leaflet-zoom-anim .leaflet-zoom-hide{visibility:hidden}.leaflet-interactive{cursor:pointer}.leaflet-grab{cursor:grab}.leaflet-crosshair,.leaflet-crosshair .leaflet-interactive{cursor:crosshair}.leaflet-popup-pane,.leaflet-control{cursor:auto}.leaflet-dragging .leaflet-grab,.leaflet-dragging .leaflet-grab .leaflet-interactive,.leaflet-dragging .leaflet-marker-draggable{cursor:grabbing}.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-image-layer,.leaflet-pane>svg path,.leaflet-tile-container{pointer-events:none}.leaflet-marker-icon.leaflet-interactive,.leaflet-image-layer.leaflet-interactive,.leaflet-pane>svg path.leaflet-interactive,svg.leaflet-image-layer.leaflet-interactive path{pointer-events:visiblePainted;pointer-events:auto}.leaflet-container{background:#ddd;outline-offset:1px}.leaflet-container a{color:#0078A8}.leaflet-zoom-box{border:2px dotted #38f;background:rgba(255,255,255,.5)}.leaflet-container{font-family:"Helvetica Neue",Arial,Helvetica,sans-serif;font-size:.75rem;line-height:1.5}.leaflet-bar{box-shadow:0 1px 5px rgba(0,0,0,.65);border-radius:4px}.leaflet-bar a{background-color:#fff;border-bottom:1px solid #ccc;width:26px;height:26px;line-height:26px;display:block;text-align:center;text-decoration:none;color:#000}.leaflet-bar a,.leaflet-control-layers-toggle{background-position:50% 50%;background-repeat:no-repeat;display:block}.leaflet-bar a:hover,.leaflet-bar a:focus{background-color:#f4f4f4}.leaflet-bar a:first-child{border-top-left-radius:4px;border-top-right-radius:4px}.leaflet-bar a:last-child{border-bottom-left-radius:4px;border-bottom-right-radius:4px;border-bottom:none}.leaflet-bar a.leaflet-disabled{cursor:default;background-color:#f4f4f4;color:#bbb}.leaflet-touch .leaflet-bar a{width:30px;height:30px;line-height:30px}.leaflet-touch .leaflet-bar a:first-child{border-top-left-radius:2px;border-top-right-radius:2px}.leaflet-touch .leaflet-bar a:last-child{border-bottom-left-radius:2px;border-bottom-right-radius:2px}.leaflet-control-zoom-in,.leaflet-control-zoom-out{font:700 18px 'Lucida Console',Monaco,monospace;text-indent:1px}.leaflet-touch .leaflet-control-zoom-in,.leaflet-touch .leaflet-control-zoom-out{font-size:22px}.leaflet-control-layers{box-shadow:0 1px 5px rgba(0,0,0,.4);background:#fff;border-radius:5px}.leaflet-control-layers-toggle{width:36px;height:36px}.leaflet-touch .leaflet-control-layers-toggle{width:44px;height:44px}.leaflet-control-layers .leaflet-control-layers-list,.leaflet-control-layers-expanded .leaflet-control-layers-toggle{display:none}.leaflet-control-layers-expanded .leaflet-control-layers-list{display:block;position:relative}.leaflet-control-layers-expanded{padding:6px 10px 6px 6px;color:#333;background:#fff}.leaflet-control-layers-scrollbar{overflow-y:scroll;overflow-x:hidden;padding-right:5px}.leaflet-control-layers-selector{margin-top:2px;position:relative;top:1px}.leaflet-control-layers label{display:block;font-size:1.08333em}.leaflet-control-layers-separator{height:0;border-top:1px solid #ddd;margin:5px -10px 5px -6px}.leaflet-container .leaflet-control-attribution{background:rgba(255,255,255,.8);margin:0}.leaflet-control-attribution,.leaflet-control-scale-line{padding:0 5px;color:#333;line-height:1.4}.leaflet-control-attribution a{text-decoration:none}.leaflet-control-attribution a:hover,.leaflet-control-attribution a:focus{text-decoration:underline}.leaflet-attribution-flag{display:inline!important;vertical-align:baseline!important;width:1em;height:.6669em}.leaflet-left .leaflet-control-scale{margin-left:5px}.leaflet-bottom .leaflet-control-scale{margin-bottom:5px}.leaflet-control-scale-line{border:2px solid #777;border-top:none;line-height:1.1;padding:2px 5px 1px;white-space:nowrap;box-sizing:border-box;background:rgba(255,255,255,.8);text-shadow:1px 1px #fff}.leaflet-control-scale-line:not(:first-child){border-top:2px solid #777;border-bottom:none;margin-top:-2px}.leaflet-control-scale-line:not(:first-child):not(:last-child){border-bottom:2px solid #777}.leaflet-touch .leaflet-control-attribution,.leaflet-touch .leaflet-control-layers,.leaflet-touch .leaflet-bar{box-shadow:none}.leaflet-touch .leaflet-control-layers,.leaflet-touch .leaflet-bar{border:2px solid rgba(0,0,0,.2);background-clip:padding-box}.leaflet-popup{position:absolute;text-align:center;margin-bottom:20px}.leaflet-popup-content-wrapper{padding:1px;text-align:left;border-radius:12px}.leaflet-popup-content{margin:13px 24px 13px 20px;line-height:1.3;font-size:1.08333em;min-height:1px}.leaflet-popup-content p{margin:1.3em 0}.leaflet-popup-tip-container{width:40px;height:20px;position:absolute;left:50%;margin-top:-1px;margin-left:-20px;overflow:hidden;pointer-events:none}.leaflet-popup-tip{width:17px;height:17px;padding:1px;margin:-10px auto 0;pointer-events:auto;transform:rotate(45deg)}.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:#fff;color:#333;box-shadow:0 3px 14px rgba(0,0,0,.4)}.leaflet-container a.leaflet-popup-close-button{position:absolute;top:0;right:0;border:none;text-align:center;width:24px;height:24px;font:16px/24px Tahoma,Verdana,sans-serif;color:#757575;text-decoration:none;background:transparent}.leaflet-container a.leaflet-popup-close-button:hover,.leaflet-container a.leaflet-popup-close-button:focus{color:#585858}.leaflet-popup-scrolled{overflow:auto}.leaflet-div-icon{background:#fff;border:1px solid #666}.leaflet-tooltip{position:absolute;padding:6px;background-color:#fff;border:1px solid #fff;border-radius:3px;color:#222;white-space:nowrap;user-select:none;pointer-events:none;box-shadow:0 1px 3px rgba(0,0,0,.4)}.leaflet-tooltip.leaflet-interactive{cursor:pointer;pointer-events:auto}.leaflet-tooltip-top:before,.leaflet-tooltip-bottom:before,.leaflet-tooltip-left:before,.leaflet-tooltip-right:before{position:absolute;pointer-events:none;border:6px solid transparent;background:transparent;content:""}.leaflet-tooltip-bottom{margin-top:6px}.leaflet-tooltip-top{margin-top:-6px}.leaflet-tooltip-bottom:before,.leaflet-tooltip-top:before{left:50%;margin-left:-6px}.leaflet-tooltip-top:before{bottom:0;margin-bottom:-12px;border-top-color:#fff}.leaflet-tooltip-bottom:before{top:0;margin-top:-12px;margin-left:-6px;border-bottom-color:#fff}.leaflet-tooltip-left{margin-left:-6px}.leaflet-tooltip-right{margin-left:6px}.leaflet-tooltip-left:before,.leaflet-tooltip-right:before{top:50%;margin-top:-6px}.leaflet-tooltip-left:before{right:0;margin-right:-12px;border-left-color:#fff}.leaflet-tooltip-right:before{left:0;margin-left:-12px;border-right-color:#fff}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 </head>
 <body>
 <header class="app-header">
@@ -777,6 +835,17 @@
           </div>
           <span class="region-badge region-west">西部｜涯月・翰林</span>
         </div>
+        <div class="day-map-wrap">
+          <div class="day-map" id="map-day1"></div>
+          <div class="map-legend">
+                <span><i style="background:#6b6458"></i>機場</span>
+                <span><i style="background:#2B2724"></i>住宿</span>
+                <span><i style="background:#1B6E62"></i>自然</span>
+                <span><i style="background:#D9701F"></i>咖啡</span>
+                <span><i style="background:#A8452A"></i>美食</span>
+                <span><i style="background:#5C5473"></i>文化</span>
+              </div>
+        </div>
         <div class="timeline">
           <div class="stop cat-food">
             <div class="stop-time">10:00</div>
@@ -874,6 +943,17 @@
             <span class="day-theme">西歸浦市區精華</span>
           </div>
           <span class="region-badge region-south">南部｜西歸浦・中文</span>
+        </div>
+        <div class="day-map-wrap">
+          <div class="day-map" id="map-day2"></div>
+          <div class="map-legend">
+                <span><i style="background:#6b6458"></i>機場</span>
+                <span><i style="background:#2B2724"></i>住宿</span>
+                <span><i style="background:#1B6E62"></i>自然</span>
+                <span><i style="background:#D9701F"></i>咖啡</span>
+                <span><i style="background:#A8452A"></i>美食</span>
+                <span><i style="background:#5C5473"></i>文化</span>
+              </div>
         </div>
         <div class="timeline">
           <div class="stop cat-nature">
@@ -998,6 +1078,17 @@
           </div>
           <span class="region-badge region-anduk">西南｜安德面</span>
         </div>
+        <div class="day-map-wrap">
+          <div class="day-map" id="map-day3"></div>
+          <div class="map-legend">
+                <span><i style="background:#6b6458"></i>機場</span>
+                <span><i style="background:#2B2724"></i>住宿</span>
+                <span><i style="background:#1B6E62"></i>自然</span>
+                <span><i style="background:#D9701F"></i>咖啡</span>
+                <span><i style="background:#A8452A"></i>美食</span>
+                <span><i style="background:#5C5473"></i>文化</span>
+              </div>
+        </div>
         <div class="timeline">
           <div class="stop cat-cafe">
             <div class="stop-time">09:30</div>
@@ -1072,6 +1163,17 @@
             <span class="day-theme">移動日・1100 高地賞楓北上</span>
           </div>
           <span class="region-badge region-move">移動｜中文 → 北村</span>
+        </div>
+        <div class="day-map-wrap">
+          <div class="day-map" id="map-day4"></div>
+          <div class="map-legend">
+                <span><i style="background:#6b6458"></i>機場</span>
+                <span><i style="background:#2B2724"></i>住宿</span>
+                <span><i style="background:#1B6E62"></i>自然</span>
+                <span><i style="background:#D9701F"></i>咖啡</span>
+                <span><i style="background:#A8452A"></i>美食</span>
+                <span><i style="background:#5C5473"></i>文化</span>
+              </div>
         </div>
         <div class="timeline">
           <div class="stop cat-food">
@@ -1159,6 +1261,17 @@
             <span class="day-theme">城山日出峰＋牛島半日遊</span>
           </div>
           <span class="region-badge region-east">東部｜城山・牛島</span>
+        </div>
+        <div class="day-map-wrap">
+          <div class="day-map" id="map-day5"></div>
+          <div class="map-legend">
+                <span><i style="background:#6b6458"></i>機場</span>
+                <span><i style="background:#2B2724"></i>住宿</span>
+                <span><i style="background:#1B6E62"></i>自然</span>
+                <span><i style="background:#D9701F"></i>咖啡</span>
+                <span><i style="background:#A8452A"></i>美食</span>
+                <span><i style="background:#5C5473"></i>文化</span>
+              </div>
         </div>
         <div class="timeline">
           <div class="stop cat-nature">
@@ -1359,6 +1472,17 @@
             <span class="day-theme">賦歸</span>
           </div>
           <span class="region-badge region-fly">機場</span>
+        </div>
+        <div class="day-map-wrap">
+          <div class="day-map" id="map-day6"></div>
+          <div class="map-legend">
+                <span><i style="background:#6b6458"></i>機場</span>
+                <span><i style="background:#2B2724"></i>住宿</span>
+                <span><i style="background:#1B6E62"></i>自然</span>
+                <span><i style="background:#D9701F"></i>咖啡</span>
+                <span><i style="background:#A8452A"></i>美食</span>
+                <span><i style="background:#5C5473"></i>文化</span>
+              </div>
         </div>
         <div class="timeline">
           <div class="stop cat-food">
@@ -1563,6 +1687,54 @@
     if (q) a.href = 'https://map.naver.com/p/search/' + encodeURIComponent(q);
   });
 
+  // ---------- Per-day mini map (Leaflet + OpenStreetMap) ----------
+  // Coordinates are approximate (compiled from public map/business listings for this trip's
+  // stops); good enough to see relative distances at a glance, not survey-grade precision.
+  var DAY_MAP_DATA = {"day1": [[33.5113, 126.493, "濟州國際機場", "airport"], [33.393845, 126.239716, "挾才海水浴場", "nature"], [33.387994, 126.239784, "翰林公園（午餐＋遊園）", "nature"], [33.3929, 126.3586, "9.81 Park", "cafe"], [33.3974, 126.3457, "Arte Museum 濟州", "cafe"], [33.4605, 126.311, "해지개카페＋한담해변", "cafe"], [33.25, 126.413, "入住預禮洞民宿", "stay"]], "day2": [[33.5113, 126.493, "濟州國際機場", "airport"], [33.25, 126.413, "住宿：預禮洞民宿", "stay"], [33.2382, 126.5591, "新緣橋＋新島散步", "nature"], [33.244854, 126.5718, "正房瀑布", "nature"], [33.244717, 126.55982, "天地淵瀑布", "nature"], [33.245547, 126.564409, "李仲燮文化街", "culture"], [33.2483, 126.5642, "西歸浦每日偶來市場（午餐）", "food"], [33.2458, 126.4493, "藥泉寺", "culture"], [33.23834, 126.42586, "中文大浦柱狀節理帶", "nature"], [33.2508, 126.568, "看著大海的豬", "food"], [33.2483, 126.5642, "黑豬肉海鮮三合", "food"], [33.246, 126.409, "Yolda", "food"]], "day3": [[33.5113, 126.493, "濟州國際機場", "airport"], [33.25, 126.413, "住宿：預禮洞民宿", "stay"], [33.306, 126.2901, "Osulloc 茶博物館＋悅詩風吟濟州之家", "cafe"], [33.306394, 126.29052, "Osulloc 茶博物館＋悅詩風吟濟州之家", "cafe"], [33.289135, 126.37011, "Camellia Hill 花園", "nature"], [33.2366, 126.3129, "山房山＋龍頭海岸", "nature"], [33.2334, 126.3137, "山房山＋龍頭海岸", "nature"], [33.30526, 126.315216, "濟州神話世界", "culture"]], "day4": [[33.5113, 126.493, "濟州國際機場", "airport"], [33.25, 126.413, "預禮洞民宿退房", "stay"], [33.3399, 126.4368, "1100 道路賞楓＋1100 高地濕地", "nature"], [33.549, 126.711, "濟州倫敦貝果博物館", "food"], [33.487, 126.678, "Cafe the Container", "food"], [33.542726, 126.669089, "咸德海水浴場＋瑞牛峰", "nature"], [33.5344, 126.6342, "咸德海水浴場＋瑞牛峰", "nature"], [33.547, 126.69, "入住北村民宿", "stay"]], "day5": [[33.5113, 126.493, "濟州國際機場", "airport"], [33.547, 126.69, "住宿：北村民宿", "stay"], [33.4621, 126.9364, "城山日出峰", "nature"], [33.4721, 126.9332, "城山港搭渡輪往牛島", "nature"], [33.5043, 126.95405, "牛島半日遊（租電動車環島）", "nature"], [33.514126, 126.958595, "牛島半日遊（租電動車環島）", "nature"], [33.516, 126.96, "牛島半日遊（租電動車環島）", "nature"], [33.514523, 126.94903, "Udo Haenyeo Sikdang", "food"], [33.496, 126.955, "안녕육지사람 2호점", "food"], [33.5013, 126.9508, "小鮑魚餐廳", "food"], [33.50834, 126.94413, "風源", "food"], [33.5, 126.963, "Udo Garden", "cafe"], [33.50332, 126.95568, "哈哈呵呵漢堡｜黑豬肉花生漢堡", "cafe"], [33.496985, 126.968603, "Cafe Bat 318", "cafe"], [33.4237, 126.9296, "涉地可支", "nature"], [33.555809, 126.796624, "月汀里海邊咖啡街", "cafe"], [33.4692, 126.9199, "Mr. Blessed briquette grill", "food"], [33.446, 126.929, "성산봄죽칼국수 성산점", "food"], [33.4739, 126.927, "House of Divers White Flag", "food"], [33.511603, 126.526019, "開回濟州市（約 1 小時）", "food"], [33.514088, 126.526215, "開回濟州市（約 1 小時）", "food"], [33.513174, 126.5247, "開回濟州市（約 1 小時）", "food"], [33.5156, 126.5267, "菜板豚", "food"], [33.4854, 126.4817, "豚舍豚", "food"], [33.487, 126.4899, "開回濟州市（約 1 小時）", "food"], [33.4972, 126.4874, "開回濟州市（約 1 小時）", "food"]], "day6": [[33.547, 126.69, "北村民宿退房", "stay"], [33.4995, 126.463, "彩虹海岸", "nature"], [33.514, 126.499, "Waboda（早餐）", "food"], [33.5113, 126.493, "濟州國際機場", "airport"]]};
+
+  var dayMapInstances = {};
+  function pinIcon(category) {
+    if (typeof L === 'undefined') return null;
+    return L.divIcon({
+      className: '',
+      html: '<span class="map-pin pin-' + category + '"></span>',
+      iconSize: [16, 16],
+      iconAnchor: [8, 8],
+      popupAnchor: [0, -8]
+    });
+  }
+  function ensureDayMap(id) {
+    if (typeof L === 'undefined') return;
+    var data = DAY_MAP_DATA[id];
+    if (!data || !data.length) return;
+    var container = document.getElementById('map-' + id);
+    if (!container || container.offsetParent === null) return; // an ancestor is still hidden; try again later
+    requestAnimationFrame(function () {
+      if (container.offsetParent === null) return;
+      if (!dayMapInstances[id]) {
+        var map = L.map(container, { scrollWheelZoom: false });
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 18,
+          attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+        var bounds = [];
+        data.forEach(function (pt) {
+          var lat = pt[0], lon = pt[1], name = pt[2], cat = pt[3];
+          L.marker([lat, lon], { icon: pinIcon(cat) }).addTo(map).bindPopup(name);
+          bounds.push([lat, lon]);
+        });
+        map.fitBounds(bounds, { padding: [22, 22] });
+        dayMapInstances[id] = map;
+      } else {
+        dayMapInstances[id].invalidateSize();
+      }
+    });
+  }
+  function currentDayId() {
+    var activeTab = document.querySelector('.day-tab.active');
+    return activeTab ? activeTab.dataset.day : 'day1';
+  }
+
   function activateMain(id, opts) {
     opts = opts || {};
     var found = false;
@@ -1580,6 +1752,7 @@
     if (opts.updateHash !== false) history.replaceState(null, '', '#' + id);
     if (opts.scrollTop !== false) window.scrollTo({ top: 0, behavior: 'auto' });
     try { localStorage.setItem('jeju-main-tab', id); } catch (e) {}
+    if (id === 'itinerary') ensureDayMap(currentDayId());
   }
 
   function activateDay(id, opts) {
@@ -1599,6 +1772,7 @@
     });
     if (opts.scrollTop !== false) window.scrollTo({ top: 0, behavior: 'auto' });
     try { localStorage.setItem('jeju-day-tab', id); } catch (e) {}
+    ensureDayMap(id);
   }
 
   mainBtns.forEach(function (b) {
