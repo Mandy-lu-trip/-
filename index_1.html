@@ -1,0 +1,1832 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>濟州島秋日自駕行</title>
+
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700;900&family=Noto+Sans+TC:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+  :root {
+    --ink: #2B2724;
+    --ink-soft: #4A4440;
+    --stone: #8A8370;
+    --line: rgba(43, 39, 36, 0.13);
+    --line-strong: rgba(43, 39, 36, 0.22);
+    --paper: #F5EFE3;
+    --card: #FBF7EE;
+    --card-raised: #FFFFFF;
+    --tangerine: #D9701F;
+    --tangerine-soft: #F3E0C8;
+    --teal: #1B6E62;
+    --teal-soft: #DDEBE4;
+    --brick: #A8452A;
+    --brick-soft: #F0DCD1;
+    --plum: #5C5473;
+    --plum-soft: #E4DFEC;
+    --shadow: 0 1px 2px rgba(43,39,36,0.06), 0 8px 24px -12px rgba(43,39,36,0.18);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #ECE6DB;
+      --ink-soft: #C7BFB1;
+      --stone: #9A9484;
+      --line: rgba(236, 230, 219, 0.14);
+      --line-strong: rgba(236, 230, 219, 0.26);
+      --paper: #1B1815;
+      --card: #221E1A;
+      --card-raised: #27221D;
+      --tangerine: #EE9349;
+      --tangerine-soft: #3A2A1B;
+      --teal: #4FB3A2;
+      --teal-soft: #1D332E;
+      --brick: #D2765A;
+      --brick-soft: #3A241C;
+      --plum: #A79DC4;
+      --plum-soft: #2B273A;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 28px -14px rgba(0,0,0,0.6);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ink: #ECE6DB;
+    --ink-soft: #C7BFB1;
+    --stone: #9A9484;
+    --line: rgba(236, 230, 219, 0.14);
+    --line-strong: rgba(236, 230, 219, 0.26);
+    --paper: #1B1815;
+    --card: #221E1A;
+    --card-raised: #27221D;
+    --tangerine: #EE9349;
+    --tangerine-soft: #3A2A1B;
+    --teal: #4FB3A2;
+    --teal-soft: #1D332E;
+    --brick: #D2765A;
+    --brick-soft: #3A241C;
+    --plum: #A79DC4;
+    --plum-soft: #2B273A;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 28px -14px rgba(0,0,0,0.6);
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: auto; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    padding-bottom: 84px; /* clear the fixed bottom nav */
+  }
+
+  .wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 20px 40px;
+  }
+
+  h1, h2, h3 {
+    font-family: "Noto Serif TC", "Noto Sans TC", serif;
+    font-weight: 900;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  .mono {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- Masthead ---------- */
+  .app-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line-strong);
+  }
+
+  .masthead {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 24px 20px 18px;
+  }
+
+  .eyebrow {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--tangerine);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  h1.title {
+    font-size: clamp(24px, 4.6vw, 34px);
+    letter-spacing: -0.01em;
+    margin-bottom: 10px;
+  }
+
+  .subline {
+    color: var(--ink-soft);
+    font-size: 14.5px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    align-items: center;
+  }
+
+  .subline .dot::before {
+    content: "·";
+    color: var(--stone);
+    margin-right: 14px;
+  }
+
+  /* ---------- Bottom nav ---------- */
+  .bottom-nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 30;
+    display: flex;
+    background: var(--card-raised);
+    border-top: 1px solid var(--line-strong);
+    box-shadow: 0 -4px 16px rgba(43,39,36,0.08);
+    padding: 6px 10px calc(6px + env(safe-area-inset-bottom, 0px));
+    gap: 6px;
+  }
+
+  .bn-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: 8px 6px 7px;
+    border: none;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--stone);
+    cursor: pointer;
+    font-family: "Noto Sans TC", sans-serif;
+    position: relative;
+  }
+  .bn-btn::before {
+    content: "";
+    position: absolute;
+    top: -7px;
+    left: 50%;
+    width: 22px;
+    height: 3px;
+    border-radius: 3px;
+    background: transparent;
+    transform: translateX(-50%);
+  }
+  .bn-btn .bn-label {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--ink-soft);
+  }
+  .bn-btn .bn-sub {
+    font-size: 10.5px;
+    color: var(--stone);
+  }
+  .bn-btn.active::before { background: var(--tangerine); }
+  .bn-btn.active .bn-label { color: var(--ink); }
+  .bn-btn:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+
+  /* ---------- Panels ---------- */
+  .panel { padding-top: 28px; }
+  .panel[hidden] { display: none; }
+
+  .page-title { margin-bottom: 20px; }
+  .page-title h2 { font-size: 22px; }
+  .page-title .page-sub {
+    color: var(--ink-soft);
+    font-size: 14px;
+    margin-top: 4px;
+  }
+
+  /* ---------- Ticket strip ---------- */
+  .tickets {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 26px;
+  }
+  @media (max-width: 600px) { .tickets { grid-template-columns: 1fr; } }
+
+  .ticket {
+    background: var(--card-raised);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    padding: 16px 18px;
+    position: relative;
+    overflow: hidden;
+  }
+  .ticket::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 5px;
+    background: var(--teal);
+  }
+  .ticket.return::before { background: var(--tangerine); }
+
+  .ticket-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .ticket-label {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--stone);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .ticket-route {
+    font-size: 22px;
+    font-weight: 700;
+    font-family: "JetBrains Mono", monospace;
+  }
+  .ticket-flight {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-top: 6px;
+  }
+  .ticket-time {
+    text-align: right;
+    font-family: "JetBrains Mono", monospace;
+  }
+  .ticket-time .t { font-size: 19px; font-weight: 700; }
+  .ticket-time .d { font-size: 11.5px; color: var(--stone); }
+
+  /* ---------- Stay cards ---------- */
+  .stays {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  @media (max-width: 600px) { .stays { grid-template-columns: 1fr; } }
+
+  .stay {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px 18px;
+  }
+  .stay-label {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--stone);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .stay-dates {
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+  .stay-place {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+  }
+  .stay a {
+    color: var(--teal);
+    font-size: 13.5px;
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+  }
+  .stay a:hover, .stay a:focus-visible { opacity: 0.75; }
+
+  /* ---------- Day sub-nav (inside itinerary page) ---------- */
+  .day-tabbar {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 20px;
+    margin-bottom: 4px;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .day-tab {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 7px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: var(--card-raised);
+    color: var(--ink-soft);
+    font-family: "Noto Sans TC", sans-serif;
+    cursor: pointer;
+    font-size: 12.5px;
+    line-height: 1.3;
+    white-space: nowrap;
+  }
+  .day-tab .dt-date {
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--ink);
+  }
+  .day-tab .dt-tag { font-size: 11px; color: var(--stone); }
+  .day-tab:hover { border-color: var(--line-strong); }
+  .day-tab:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+  .day-tab.active { background: var(--ink); border-color: var(--ink); }
+  .day-tab.active .dt-date { color: var(--paper); }
+  .day-tab.active .dt-tag { color: var(--paper); opacity: 0.7; }
+
+  /* ---------- Day card ---------- */
+  .day-panel[hidden] { display: none; }
+
+  .day-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+
+  .day-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--line);
+    flex-wrap: wrap;
+  }
+
+  .day-head-left { display: flex; align-items: baseline; gap: 14px; }
+
+  .day-num {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 13px;
+    color: var(--stone);
+    font-weight: 700;
+  }
+
+  .day-date {
+    font-family: "Noto Serif TC", serif;
+    font-weight: 700;
+    font-size: 19px;
+  }
+
+  .day-theme { color: var(--ink-soft); font-size: 14px; }
+
+  .region-badge {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 11px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+  .region-west   { background: var(--teal-soft); color: var(--teal); }
+  .region-south  { background: var(--brick-soft); color: var(--brick); }
+  .region-anduk  { background: var(--tangerine-soft); color: var(--tangerine); }
+  .region-move   { background: var(--plum-soft); color: var(--plum); }
+  .region-east   { background: var(--teal-soft); color: var(--teal); }
+  .region-fly    { background: var(--line); color: var(--ink-soft); }
+
+  .timeline { padding: 6px 22px 20px; }
+
+  .stop {
+    display: grid;
+    grid-template-columns: 62px 20px 1fr;
+    column-gap: 4px;
+  }
+
+  .stop-time {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--ink-soft);
+    padding-top: 14px;
+  }
+
+  .stop-rail { display: flex; flex-direction: column; align-items: center; }
+  .stop-dot {
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    margin-top: 17px;
+    flex-shrink: 0;
+    background: var(--teal);
+  }
+  .stop-line { width: 1px; flex: 1; background: var(--line-strong); margin-top: 2px; }
+  .stop:last-child .stop-line { display: none; }
+
+  .cat-nature .stop-dot { background: var(--teal); }
+  .cat-cafe .stop-dot { background: var(--tangerine); }
+  .cat-food .stop-dot { background: var(--brick); }
+  .cat-culture .stop-dot { background: var(--plum); }
+
+  .stop-body { padding: 10px 0 20px; }
+
+  .stop-name-row { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+  .stop-name { font-weight: 700; font-size: 15.5px; }
+  .stop-kr { font-size: 12.5px; color: var(--stone); }
+
+  .tag {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 100px;
+    letter-spacing: 0.02em;
+  }
+  .cat-nature .tag { background: var(--teal-soft); color: var(--teal); }
+  .cat-cafe .tag { background: var(--tangerine-soft); color: var(--tangerine); }
+  .cat-food .tag { background: var(--brick-soft); color: var(--brick); }
+  .cat-culture .tag { background: var(--plum-soft); color: var(--plum); }
+
+  .stop-desc { color: var(--ink-soft); font-size: 14px; margin-top: 5px; max-width: 60ch; }
+
+  /* ---------- Address / navigate links ---------- */
+  .addr-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: var(--teal);
+    text-decoration: none;
+    max-width: 100%;
+  }
+  .addr-link:hover, .addr-link:focus-visible { text-decoration: underline; }
+  .addr-link .pin { flex-shrink: 0; opacity: 0.85; }
+  .addr-link .addr-text { overflow-wrap: anywhere; }
+  .stop-addrs {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 8px;
+  }
+  .addr-unknown {
+    font-size: 11.5px;
+    color: var(--stone);
+    font-style: italic;
+    margin-top: 6px;
+  }
+
+  /* ---------- Choice / option groups ---------- */
+  .stop.is-choice .stop-dot { background: var(--stone); box-shadow: 0 0 0 3px var(--card); }
+  .choice-flag {
+    display: inline-flex;
+    align-items: center;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: var(--tangerine);
+    background: var(--tangerine-soft);
+    padding: 1px 7px;
+    border-radius: 100px;
+  }
+
+  /* ---------- Snacks / souvenir page ---------- */
+  .snack-flag {
+    display: inline-flex;
+    align-items: center;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: var(--teal);
+    background: var(--teal-soft);
+    padding: 1px 7px;
+    border-radius: 100px;
+    margin-top: 4px;
+  }
+
+  .option-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .option-card {
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    background: var(--card-raised);
+    padding: 9px 11px;
+  }
+  .option-name { font-weight: 700; font-size: 13.5px; }
+  .option-note { font-size: 11.5px; color: var(--stone); margin-top: 3px; line-height: 1.45; }
+  .option-card .addr-link { margin-top: 6px; font-size: 11px; }
+
+  /* nested option group (e.g. dinner location -> then black-pork choice) */
+  .option-card .option-grid {
+    margin-top: 8px;
+    grid-template-columns: 1fr;
+  }
+  .option-card .option-card { background: var(--paper); }
+
+  /* ---------- Day mini-map ---------- */
+  .day-map-wrap { padding: 4px 22px 18px; }
+  .day-map {
+    height: 260px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--card-raised);
+  }
+  .day-map .leaflet-tile-pane { filter: saturate(0.85) brightness(1.02); }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .day-map .leaflet-tile-pane { filter: saturate(0.7) brightness(0.82) invert(1) hue-rotate(180deg); }
+  }
+  :root[data-theme="dark"] .day-map .leaflet-tile-pane { filter: saturate(0.7) brightness(0.82) invert(1) hue-rotate(180deg); }
+  .map-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    margin-top: 10px;
+    font-size: 11.5px;
+    color: var(--ink-soft);
+  }
+  .map-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .map-legend i {
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+    border: 1.5px solid var(--card-raised);
+    box-shadow: 0 0 0 1px var(--line-strong);
+  }
+  .leaflet-popup-content-wrapper { border-radius: 8px; }
+  .leaflet-popup-content {
+    font-family: "Noto Sans TC", sans-serif;
+    font-size: 12.5px;
+    margin: 8px 10px;
+  }
+  .map-pin {
+    display: block;
+    box-sizing: border-box;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.35);
+  }
+  .map-pin.pin-airport { background: #6b6458; }
+  .map-pin.pin-stay { background: #2B2724; width: 16px; height: 16px; }
+  .map-pin.pin-nature { background: #1B6E62; }
+  .map-pin.pin-cafe { background: #D9701F; }
+  .map-pin.pin-food { background: #A8452A; }
+  .map-pin.pin-culture { background: #5C5473; }
+  .map-pin.pin-other { background: #8A8370; }
+
+  /* ---------- Day footnote ---------- */
+  .day-note {
+    margin: 2px 22px 20px;
+    padding: 11px 14px;
+    border-radius: 9px;
+    background: var(--tangerine-soft);
+    color: var(--ink-soft);
+    font-size: 12.5px;
+    line-height: 1.6;
+  }
+  .day-note strong { color: var(--ink); }
+
+  /* ---------- Prev/next + cross-page links ---------- */
+  .panel-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .nav-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: var(--card-raised);
+    color: var(--ink);
+    font-family: "Noto Sans TC", sans-serif;
+    cursor: pointer;
+    text-align: left;
+  }
+  .nav-btn.next { text-align: right; align-items: flex-end; }
+  .nav-btn:hover { border-color: var(--line-strong); }
+  .nav-btn:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+  .nav-btn .nb-label { font-size: 11px; color: var(--stone); letter-spacing: 0.04em; }
+  .nav-btn .nb-title { font-weight: 700; font-size: 14px; font-family: "JetBrains Mono", monospace; }
+  .nav-btn[disabled] { opacity: 0.35; cursor: default; pointer-events: none; }
+
+  .jump-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 22px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: var(--card-raised);
+    color: var(--ink);
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: "Noto Sans TC", sans-serif;
+  }
+  .jump-link:hover { border-color: var(--line-strong); }
+
+  /* ---------- Prep checklist ---------- */
+  .prep-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+  @media (max-width: 600px) { .prep-grid { grid-template-columns: 1fr; } }
+
+  .prep-col h3 {
+    font-size: 15px;
+    font-family: "Noto Sans TC", sans-serif;
+    font-weight: 700;
+    color: var(--tangerine);
+    margin-bottom: 12px;
+    letter-spacing: 0.02em;
+  }
+
+  .prep-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .prep-list li { display: flex; gap: 10px; font-size: 14px; color: var(--ink-soft); align-items: flex-start; }
+  .prep-list li::before {
+    content: "";
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--teal);
+    margin-top: 7px;
+    flex-shrink: 0;
+  }
+  .prep-list strong { color: var(--ink); font-weight: 700; }
+
+  /* ---------- Notes / dropped items box (checklist page) ---------- */
+  .review-box {
+    margin-top: 36px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line-strong);
+  }
+  .review-box h3 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .review-box .review-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+  }
+  .review-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  @media (max-width: 600px) { .review-grid { grid-template-columns: 1fr; } }
+  .review-col-title {
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    margin-bottom: 8px;
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 100px;
+  }
+  .review-col-title.drop { background: var(--brick-soft); color: var(--brick); }
+  .review-col-title.unknown { background: var(--line); color: var(--ink-soft); }
+  .review-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+  .review-list li { font-size: 13px; color: var(--ink-soft); line-height: 1.55; }
+  .review-list strong { color: var(--ink); }
+
+  footer {
+    margin-top: 40px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+    color: var(--stone);
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    a, .day-tab, .nav-btn, .bn-btn, .jump-link { transition: opacity 0.15s ease, border-color 0.15s ease, color 0.15s ease; }
+  }
+</style>
+<style>
+/* Leaflet 1.9.4 core CSS, inlined (Artifact CSP only allows scripts from CDNs, not stylesheets) */
+.leaflet-pane,.leaflet-tile,.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-tile-container,.leaflet-pane>svg,.leaflet-pane>canvas,.leaflet-zoom-box,.leaflet-image-layer,.leaflet-layer{position:absolute;left:0;top:0}.leaflet-container{overflow:hidden}.leaflet-tile,.leaflet-marker-icon,.leaflet-marker-shadow{-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-user-drag:none}.leaflet-tile::selection{background:transparent}.leaflet-safari .leaflet-tile{image-rendering:-webkit-optimize-contrast}.leaflet-safari .leaflet-tile-container{width:1600px;height:1600px;-webkit-transform-origin:0 0}.leaflet-marker-icon,.leaflet-marker-shadow{display:block}.leaflet-container .leaflet-overlay-pane svg{max-width:none!important;max-height:none!important}.leaflet-container .leaflet-marker-pane img,.leaflet-container .leaflet-shadow-pane img,.leaflet-container .leaflet-tile-pane img,.leaflet-container img.leaflet-image-layer,.leaflet-container .leaflet-tile{max-width:none!important;max-height:none!important;width:auto;padding:0}.leaflet-container img.leaflet-tile{mix-blend-mode:plus-lighter}.leaflet-container.leaflet-touch-zoom{-ms-touch-action:pan-x pan-y;touch-action:pan-x pan-y}.leaflet-container.leaflet-touch-drag{-ms-touch-action:pinch-zoom;touch-action:none;touch-action:pinch-zoom}.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom{-ms-touch-action:none;touch-action:none}.leaflet-container{-webkit-tap-highlight-color:transparent}.leaflet-container a{-webkit-tap-highlight-color:rgba(51,181,229,.4)}.leaflet-tile{filter:inherit;visibility:hidden}.leaflet-tile-loaded{visibility:inherit}.leaflet-zoom-box{width:0;height:0;box-sizing:border-box;z-index:800}.leaflet-overlay-pane svg{-moz-user-select:none}.leaflet-pane{z-index:400}.leaflet-tile-pane{z-index:200}.leaflet-overlay-pane{z-index:400}.leaflet-shadow-pane{z-index:500}.leaflet-marker-pane{z-index:600}.leaflet-tooltip-pane{z-index:650}.leaflet-popup-pane{z-index:700}.leaflet-map-pane canvas{z-index:100}.leaflet-map-pane svg{z-index:200}.leaflet-vml-shape{width:1px;height:1px}.lvml{behavior:url(#default#VML);display:inline-block;position:absolute}.leaflet-control{position:relative;z-index:800;pointer-events:visiblePainted;pointer-events:auto}.leaflet-top,.leaflet-bottom{position:absolute;z-index:1000;pointer-events:none}.leaflet-top{top:0}.leaflet-right{right:0}.leaflet-bottom{bottom:0}.leaflet-left{left:0}.leaflet-control{float:left;clear:both}.leaflet-right .leaflet-control{float:right}.leaflet-top .leaflet-control{margin-top:10px}.leaflet-bottom .leaflet-control{margin-bottom:10px}.leaflet-left .leaflet-control{margin-left:10px}.leaflet-right .leaflet-control{margin-right:10px}.leaflet-fade-anim .leaflet-popup{opacity:0;transition:opacity .2s linear}.leaflet-fade-anim .leaflet-map-pane .leaflet-popup{opacity:1}.leaflet-zoom-animated{transform-origin:0 0}svg.leaflet-zoom-animated{will-change:transform}.leaflet-zoom-anim .leaflet-zoom-animated{transition:transform .25s cubic-bezier(0,0,.25,1)}.leaflet-zoom-anim .leaflet-tile,.leaflet-pan-anim .leaflet-tile{transition:none}.leaflet-zoom-anim .leaflet-zoom-hide{visibility:hidden}.leaflet-interactive{cursor:pointer}.leaflet-grab{cursor:grab}.leaflet-crosshair,.leaflet-crosshair .leaflet-interactive{cursor:crosshair}.leaflet-popup-pane,.leaflet-control{cursor:auto}.leaflet-dragging .leaflet-grab,.leaflet-dragging .leaflet-grab .leaflet-interactive,.leaflet-dragging .leaflet-marker-draggable{cursor:grabbing}.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-image-layer,.leaflet-pane>svg path,.leaflet-tile-container{pointer-events:none}.leaflet-marker-icon.leaflet-interactive,.leaflet-image-layer.leaflet-interactive,.leaflet-pane>svg path.leaflet-interactive,svg.leaflet-image-layer.leaflet-interactive path{pointer-events:visiblePainted;pointer-events:auto}.leaflet-container{background:#ddd;outline-offset:1px}.leaflet-container a{color:#0078A8}.leaflet-zoom-box{border:2px dotted #38f;background:rgba(255,255,255,.5)}.leaflet-container{font-family:"Helvetica Neue",Arial,Helvetica,sans-serif;font-size:.75rem;line-height:1.5}.leaflet-bar{box-shadow:0 1px 5px rgba(0,0,0,.65);border-radius:4px}.leaflet-bar a{background-color:#fff;border-bottom:1px solid #ccc;width:26px;height:26px;line-height:26px;display:block;text-align:center;text-decoration:none;color:#000}.leaflet-bar a,.leaflet-control-layers-toggle{background-position:50% 50%;background-repeat:no-repeat;display:block}.leaflet-bar a:hover,.leaflet-bar a:focus{background-color:#f4f4f4}.leaflet-bar a:first-child{border-top-left-radius:4px;border-top-right-radius:4px}.leaflet-bar a:last-child{border-bottom-left-radius:4px;border-bottom-right-radius:4px;border-bottom:none}.leaflet-bar a.leaflet-disabled{cursor:default;background-color:#f4f4f4;color:#bbb}.leaflet-touch .leaflet-bar a{width:30px;height:30px;line-height:30px}.leaflet-touch .leaflet-bar a:first-child{border-top-left-radius:2px;border-top-right-radius:2px}.leaflet-touch .leaflet-bar a:last-child{border-bottom-left-radius:2px;border-bottom-right-radius:2px}.leaflet-control-zoom-in,.leaflet-control-zoom-out{font:700 18px 'Lucida Console',Monaco,monospace;text-indent:1px}.leaflet-touch .leaflet-control-zoom-in,.leaflet-touch .leaflet-control-zoom-out{font-size:22px}.leaflet-control-layers{box-shadow:0 1px 5px rgba(0,0,0,.4);background:#fff;border-radius:5px}.leaflet-control-layers-toggle{width:36px;height:36px}.leaflet-touch .leaflet-control-layers-toggle{width:44px;height:44px}.leaflet-control-layers .leaflet-control-layers-list,.leaflet-control-layers-expanded .leaflet-control-layers-toggle{display:none}.leaflet-control-layers-expanded .leaflet-control-layers-list{display:block;position:relative}.leaflet-control-layers-expanded{padding:6px 10px 6px 6px;color:#333;background:#fff}.leaflet-control-layers-scrollbar{overflow-y:scroll;overflow-x:hidden;padding-right:5px}.leaflet-control-layers-selector{margin-top:2px;position:relative;top:1px}.leaflet-control-layers label{display:block;font-size:1.08333em}.leaflet-control-layers-separator{height:0;border-top:1px solid #ddd;margin:5px -10px 5px -6px}.leaflet-container .leaflet-control-attribution{background:rgba(255,255,255,.8);margin:0}.leaflet-control-attribution,.leaflet-control-scale-line{padding:0 5px;color:#333;line-height:1.4}.leaflet-control-attribution a{text-decoration:none}.leaflet-control-attribution a:hover,.leaflet-control-attribution a:focus{text-decoration:underline}.leaflet-attribution-flag{display:inline!important;vertical-align:baseline!important;width:1em;height:.6669em}.leaflet-left .leaflet-control-scale{margin-left:5px}.leaflet-bottom .leaflet-control-scale{margin-bottom:5px}.leaflet-control-scale-line{border:2px solid #777;border-top:none;line-height:1.1;padding:2px 5px 1px;white-space:nowrap;box-sizing:border-box;background:rgba(255,255,255,.8);text-shadow:1px 1px #fff}.leaflet-control-scale-line:not(:first-child){border-top:2px solid #777;border-bottom:none;margin-top:-2px}.leaflet-control-scale-line:not(:first-child):not(:last-child){border-bottom:2px solid #777}.leaflet-touch .leaflet-control-attribution,.leaflet-touch .leaflet-control-layers,.leaflet-touch .leaflet-bar{box-shadow:none}.leaflet-touch .leaflet-control-layers,.leaflet-touch .leaflet-bar{border:2px solid rgba(0,0,0,.2);background-clip:padding-box}.leaflet-popup{position:absolute;text-align:center;margin-bottom:20px}.leaflet-popup-content-wrapper{padding:1px;text-align:left;border-radius:12px}.leaflet-popup-content{margin:13px 24px 13px 20px;line-height:1.3;font-size:1.08333em;min-height:1px}.leaflet-popup-content p{margin:1.3em 0}.leaflet-popup-tip-container{width:40px;height:20px;position:absolute;left:50%;margin-top:-1px;margin-left:-20px;overflow:hidden;pointer-events:none}.leaflet-popup-tip{width:17px;height:17px;padding:1px;margin:-10px auto 0;pointer-events:auto;transform:rotate(45deg)}.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:#fff;color:#333;box-shadow:0 3px 14px rgba(0,0,0,.4)}.leaflet-container a.leaflet-popup-close-button{position:absolute;top:0;right:0;border:none;text-align:center;width:24px;height:24px;font:16px/24px Tahoma,Verdana,sans-serif;color:#757575;text-decoration:none;background:transparent}.leaflet-container a.leaflet-popup-close-button:hover,.leaflet-container a.leaflet-popup-close-button:focus{color:#585858}.leaflet-popup-scrolled{overflow:auto}.leaflet-div-icon{background:#fff;border:1px solid #666}.leaflet-tooltip{position:absolute;padding:6px;background-color:#fff;border:1px solid #fff;border-radius:3px;color:#222;white-space:nowrap;user-select:none;pointer-events:none;box-shadow:0 1px 3px rgba(0,0,0,.4)}.leaflet-tooltip.leaflet-interactive{cursor:pointer;pointer-events:auto}.leaflet-tooltip-top:before,.leaflet-tooltip-bottom:before,.leaflet-tooltip-left:before,.leaflet-tooltip-right:before{position:absolute;pointer-events:none;border:6px solid transparent;background:transparent;content:""}.leaflet-tooltip-bottom{margin-top:6px}.leaflet-tooltip-top{margin-top:-6px}.leaflet-tooltip-bottom:before,.leaflet-tooltip-top:before{left:50%;margin-left:-6px}.leaflet-tooltip-top:before{bottom:0;margin-bottom:-12px;border-top-color:#fff}.leaflet-tooltip-bottom:before{top:0;margin-top:-12px;margin-left:-6px;border-bottom-color:#fff}.leaflet-tooltip-left{margin-left:-6px}.leaflet-tooltip-right{margin-left:6px}.leaflet-tooltip-left:before,.leaflet-tooltip-right:before{top:50%;margin-top:-6px}.leaflet-tooltip-left:before{right:0;margin-right:-12px;border-left-color:#fff}.leaflet-tooltip-right:before{left:0;margin-left:-12px;border-right-color:#fff}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+
+
+</head>
+<body>
+<header class="app-header">
+  <div class="masthead">
+    <div class="eyebrow">JEJU · 濟州島自駕行程</div>
+    <h1 class="title">濟州島秋日自駕行</h1>
+    <div class="subline">
+      <span>2026/10/27（二）— 11/01（日）・5 夜 6 日</span>
+      <span class="dot">同行 4 人</span>
+      <span class="dot">全程自駕</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- PAGE 1: 航班與住宿 -->
+  <section class="panel" id="flights" role="tabpanel">
+    <div class="page-title">
+      <h2>航班與住宿</h2>
+      <div class="page-sub">去回程機票、兩間住宿的日期與位置</div>
+    </div>
+
+    <div class="tickets">
+      <div class="ticket">
+        <div class="ticket-label">去程・臺灣虎航 IT654</div>
+        <div class="ticket-row">
+          <div>
+            <div class="ticket-route">TPE → CJU</div>
+            <div class="ticket-flight">10/27（二）・空中巴士 A320・經濟艙</div>
+          </div>
+          <div class="ticket-time">
+            <div class="t">07:05 → 10:00</div>
+            <div class="d">台北桃園機場 T1 → 濟州國際機場</div>
+          </div>
+        </div>
+      </div>
+      <div class="ticket return">
+        <div class="ticket-label">回程・臺灣虎航 IT655</div>
+        <div class="ticket-row">
+          <div>
+            <div class="ticket-route">CJU → TPE</div>
+            <div class="ticket-flight">11/01（日）・空中巴士 A320・經濟艙</div>
+          </div>
+          <div class="ticket-time">
+            <div class="t">10:50 → 12:10</div>
+            <div class="d">濟州國際機場 → 台北桃園機場 T1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stays">
+      <div class="stay">
+        <div class="stay-label">住宿一・3 晚</div>
+        <div class="stay-dates">10/27 — 10/30</div>
+        <div class="stay-place">西歸浦市 預禮洞・鄰近中文觀光區，Olle 8 號路線旁的地中海風獨棟民宿</div>
+        <div class="stop-addrs">
+          <a class="addr-link" data-navq="서귀포시 역로40번길 18" href="#" target="_blank" rel="noopener"><svg class="pin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">西歸浦市 驛路40番街 18</span></a>
+        </div>
+        <a href="https://www.airbnb.com.tw/rooms/927390418320011830" target="_blank" rel="noopener">查看 Airbnb 房源 ↗</a>
+      </div>
+      <div class="stay">
+        <div class="stay-label">住宿二・2 晚</div>
+        <div class="stay-dates">10/30 — 11/01</div>
+        <div class="stay-place">濟州市 朝天邑 北村里・濟州石屋改建的靜謐村落民宿</div>
+        <div class="stop-addrs">
+          <a class="addr-link" data-navq="제주시 조천읍 북촌북길 58-7" href="#" target="_blank" rel="noopener"><svg class="pin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">濟州市 朝天邑 北村北路 58-7</span></a>
+        </div>
+        <a href="https://www.airbnb.com.tw/rooms/1583832212482818067" target="_blank" rel="noopener">查看 Airbnb 房源 ↗</a>
+      </div>
+    </div>
+
+    <button class="jump-link" data-jump="itinerary">查看逐日行程 ▸</button>
+  </section>
+
+  <!-- PAGE 2: 行程表 -->
+  <section class="panel" id="itinerary" role="tabpanel" hidden>
+    <div class="page-title">
+      <h2>逐日行程</h2>
+      <div class="page-sub">點地址可直接開 Naver Map 導航；灰點的項目是「選一個」的口袋名單</div>
+    </div>
+
+    <nav class="day-tabbar" role="tablist" aria-label="選擇日期">
+      <button class="day-tab" role="tab" data-day="day1"><span class="dt-date">10/27</span><span class="dt-tag">抵達</span></button>
+      <button class="day-tab" role="tab" data-day="day2"><span class="dt-date">10/28</span><span class="dt-tag">西歸浦</span></button>
+      <button class="day-tab" role="tab" data-day="day3"><span class="dt-date">10/29</span><span class="dt-tag">安德面</span></button>
+      <button class="day-tab" role="tab" data-day="day4"><span class="dt-date">10/30</span><span class="dt-tag">北上</span></button>
+      <button class="day-tab" role="tab" data-day="day5"><span class="dt-date">10/31</span><span class="dt-tag">東部＋牛島</span></button>
+      <button class="day-tab" role="tab" data-day="day6"><span class="dt-date">11/01</span><span class="dt-tag">賦歸</span></button>
+    </nav>
+
+    <!-- DAY 1 -->
+    <div class="day-panel" id="day1" role="tabpanel" hidden>
+      <div class="day-card">
+        <div class="day-head">
+          <div class="day-head-left">
+            <span class="day-num">DAY 1</span>
+            <span class="day-date">10/27（二）</span>
+            <span class="day-theme">抵達・西部海岸線南下</span>
+          </div>
+          <span class="region-badge region-west">西部｜涯月・翰林</span>
+        </div>
+        <div class="day-map-wrap">
+          <div class="day-map" id="map-day1"></div>
+          <div class="map-legend">
+                <span><i style="background:#6b6458"></i>機場</span>
+                <span><i style="background:#2B2724"></i>住宿</span>
+                <span><i style="background:#1B6E62"></i>自然</span>
+                <span><i style="background:#D9701F"></i>咖啡</span>
+                <span><i style="background:#A8452A"></i>美食</span>
+                <span><i style="background:#5C5473"></i>文化</span>
+              </div>
+        </div>
+        <div class="timeline">
+          <div class="stop cat-food">
+            <div class="stop-time">10:00</div>
+            <div class="stop-rail"><div class="stop-dot"></div><div class="stop-line"></div></div>
+            <div class="stop-body">
+              <div class="stop-name-row"><span class="stop-name">抵達濟州國際機場</span><span class="tag">交通</span></div>
+              <div class="stop-desc">領行李後至租車櫃檯取車，記得帶護照、台灣駕照正本、國際駕照與信用卡；取車時拍照存證外觀與油量。</div>
+              <div class="stop-addrs">
+                <a class="addr-link" data-navq="제주국제공항" href="#" target="_blank" rel="noopener"><svg class="pin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">濟州特別自治道 濟州市 空港路 2</span></a>
+              </div>
+            </div>
+          </div>
+          <div class="stop cat-nature">
+            <div class="stop-time">11:30</div>
+            <div class="stop-rail"><div class="stop-dot"></div><div class="stop-line"></div></div>
+            <div class="stop-body">
+              <div class="stop-name-row"><span class="stop-name">挾才海水浴場</span><span class="stop-kr">협재해수욕장</span><span class="tag">自然</span></div>
+              <div class="stop-desc">白沙與飛揚島相映的經典海景，下機後透透氣、拍第一組照片的好地方。</div>
+              <div class="stop-addrs">
+                <a class="addr-link" data-navq="협재해수욕장" href="#" target="_blank" rel="noopener"><svg class="pin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">濟州市 翰林邑 翰林路 329-10</span></a>
+              </div>
+            </div>
+          </div>
+          <div class="stop cat-nature">
+            <div class="stop-time">12:30</div>
+            <div class="stop-rail"><div class="stop-dot"></div><div class="stop-line"></div></div>
+            <div class="stop-body">
+              <div class="stop-name-row"><span class="stop-name">翰林公園（午餐＋遊園）</span><span class="stop-kr">한림공원</span><span class="tag">自然</span></div>
+              <div class="stop-desc">亞熱帶植物園加協재熔岩洞，園區內外都有海鮮、鄉土料理可用午餐，步調輕鬆。</div>
+              <div class="stop-addrs">
+                <a class="addr-link" data-navq="한림공원" href="#" target="_blank" rel="noopener"><svg class="pin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">濟州市 翰林邑 翰林路 300</span></a>
+              </div>
+            </div>
+          </div>
+          <div class="stop cat-cafe is-choice">
+            <div class="stop-time">14:30</div>
+            <div class="stop-rail"><div class="stop-dot"></div><div class="stop-line"></div></div>
+            <div class="stop-body">
+              <div class="stop-name-row"><span class="stop-name">涯月景點</span><span class="choice-flag">擇一</span></div>
+              <div class="stop-desc">從你 PDF 清單挑出來的三個涯月新點，剛好都在回中文的路上，看當下體力和興趣選一個就好，不用三個都跑：</div>
+              <div class="option-grid">
+                <div class="option-card">
+                  <div class="option-name">9.81 Park</div>
+                  <div class="option-note">重力賽車體驗，約 1.5–2 小時，需另購票，體力／刺激感優先選這個</div>
+                  <a class="addr-link" data-navq="9.81파크" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">濟州市 涯月邑 天德路 880-24</span></a>
+                </div>
+                <div class="option-card">
+                  <div class="option-name">Arte Museum 濟州</div>
+                  <div class="option-note">沉浸式光影美術館，約 1 小時，室內、拍照優先選這個</div>
+                  <a class="addr-link" data-navq="아르떼뮤지엄 제주" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">濟州市 涯月邑 御林碑路 478</span></a>
+                </div>
+                <div class="option-card">
+                  <div class="option-name">해지개카페＋한담해변</div>
+                  <div class="option-note">涯月海邊咖啡廳散步版，約 1 小時，想悠閒喝咖啡選這個</div>
+                  <a class="addr-link" data-navq="해지개" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">濟州市 涯月邑 涯月北西街 52</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="stop cat-food">
+            <div class="stop-time">17:30</div>
+            <div class="stop-rail"><div class="stop-dot"></div><div class="stop-line"></div></div>
+            <div class="stop-body">
+              <div class="stop-name-row"><span class="stop-name">入住預禮洞民宿</span><span class="tag">住宿</span></div>
+              <div class="stop-desc">沿海岸線南下約 1 小時車程抵達中文一帶，check-in、稍作休息。</div>
+              <div class="stop-addrs">
+                <a class="addr-link" data-navq="서귀포시 역로40번길 18" href="#" target="_blank" rel="noopener"><svg class="pin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">西歸浦市 驛路40番街 18</span></a>
+              </div>
+            </div>
+          </div>
+          <div class="stop cat-food">
+            <div class="stop-time">19:00</div>
+            <div class="stop-rail"><div class="stop-dot"></div></div>
+            <div class="stop-body">
+              <div class="stop-name-row"><span class="stop-name">中文觀光區晚餐</span><span class="tag">美食</span></div>
+              <div class="stop-desc">第一晚在住宿周邊輕鬆用餐，早點休息迎接接下來的行程。</div>
+            </div>
+          </div>
+        </div>
+        <div class="day-note"><strong>PDF 清單裡沒排進來的：</strong>Jeju Olle Trail Route 12（無等—龍水）在更西邊的漢京面，只給健行愛好者參考，會拉長這天的路程，一般行程建議跳過。</div>
+      </div>
+      <div class="panel-nav">
+        <button class="nav-btn" disabled><span class="nb-label">◂ 上一天</span><span class="nb-title">已是第一天</span></button>
+        <button class="nav-btn next" data-day="day2"><span class="nb-label">下一天</span><span class="nb-title">DAY 2・10/28 ▸</span></button>
+      </div>
+    </div>
+
+    <!-- DAY 2 -->
+    <div class="day-panel" id="day2" role="tabpanel" hidden>
+      <div class="day-card">
+        <div class="day-head">
+          <div class="day-head-left">
+            <span class="day-num">DAY 2</span>
+            <span class="day-date">10/28（三）</span>
+            <span class="day-theme">西歸浦市區精華</span>
+          </div>
+          <span class="region-badge region-south">南部｜西歸浦・中文</span>
+        </div>
+        <div class="day-map-wrap">
+          <div class="day-map" id="map-day2"></div>
+          <div class="map-legend">
+                <span><i style="background:#6b6458"></i>機場</span>
+                <span><i style="background:#2B2724"></i>住宿</span>
+                <span><i style="background:#1B6E62"></i>自然</span>
+                <span><i style="background:#D9701F"></i>咖啡</span>
+                <span><i style="background:#A8452A"></i>美食</span>
+                <span><i style="background:#5C5473"></i>文化</span>
+              </div>
+        </div>
+        <div class="timeline">
+          <div class="stop cat-nature is-choice">
+            <div class="stop-time">09:00</div>
+            <div class="stop-rail"><div class="stop-dot"></div><div class="stop-line"></div></div>
+            <div class="stop-body">
+              <div class="stop-name-row"><span class="stop-name">順遊景點</span><span class="choice-flag">擇一</span></div>
+              <div class="stop-desc">兩個都在西歸浦港附近、車程 5 分鐘內，挑一個順路走走拍照就好：</div>
+              <div class="option-grid">
+                <div class="option-card">
+                  <div class="option-name">新緣橋＋新島散步</div>
+                  <div class="option-note">새연교・새섬・跨海步橋連接的小島，早上人少，適合悠閒散步拍照</div>
+                  <a class="addr-link" data-navq="새연교" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">西歸浦市 南城中路 40</span></a>
+                </div>
+                <div class="option-card">
+                  <div class="option-name">正房瀑布</div>
+                  <div class="option-note">정방폭포・全韓國少數直接落入海裡的瀑布</div>
+                  <a class="addr-link" data-navq="정방폭포" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">西歸浦市 七十里路214街 37</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="stop cat-nature">
+            <div class="stop-time">09:50</div>
+            <div class="stop-rail"><div class="stop-dot"></div><div class="stop-line"></div></div>
+            <div class="stop-body">
+              <div class="stop-name-row"><span class="stop-name">天地淵瀑布</span><span class="stop-kr">천지연폭포</span><span class="tag">自然</span></div>
+              <div class="stop-desc">林蔭步道走到瀑布前，步程平緩，四人同行不趕時間剛好。今天的兩個固定景點之一。</div>
+              <div class="stop-addrs">
+                <a class="addr-link" data-navq="천지연폭포" href="#" target="_blank" rel="noopener"><svg class="pin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">西歸浦市 南城中路 2-15</span></a>
+              </div>
+            </div>
+          </div>
+          <div class="stop cat-culture is-choice">
+            <div class="stop-time">10:40</div>
+            <div class="stop-rail"><div class="stop-dot"></div><div class="stop-line"></div></div>
+            <div class="stop-body">
+              <div class="stop-name-row"><span class="stop-name">文化景點</span><span class="choice-flag">擇一</span></div>
+              <div class="stop-desc">午餐前後排一個文化景點，看想逛老街還是逛寺廟：</div>
+              <div class="option-grid">
+                <div class="option-card">
+                  <div class="option-name">李仲燮文化街</div>
+                  <div class="option-note">이중섭거리・畫家李仲燮故居周邊的老街，藝廊、小店與在地食堂交錯，就在市場旁邊</div>
+                  <a class="addr-link" data-navq="이중섭거리" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">西歸浦市 李仲燮路 29 一帶</span></a>
+                </div>
+                <div class="option-card">
+                  <div class="option-name">藥泉寺</div>
+                  <div class="option-note">약천사・中文區規模最大的寺廟，大雄寶殿很壯觀，安靜走走約 30–40 分鐘</div>
+                  <a class="addr-link" data-navq="약천사" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">西歸浦市 離於島路 293-28</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="stop cat-food">
+            <div class="stop-time">11:40</div>
+            <div class="stop-rail"><div class="stop-dot"></div><div class="stop-line"></div></div>
+            <div class="stop-body">
+              <div class="stop-name-row"><span class="stop-name">西歸浦每日偶來市場（午餐）</span><span class="stop-kr">서귀포 매일올레시장</span><span class="tag">美食</span></div>
+              <div class="stop-desc">黑豬肉香腸、현地蜜柑、烤扇貝等街邊小吃，也適合先買一波伴手禮。</div>
+              <div class="stop-addrs">
+                <a class="addr-link" data-navq="서귀포매일올레시장" href="#" target="_blank" rel="noopener"><svg class="pin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">西歸浦市 中央路62街 18</span></a>
+              </div>
+            </div>
+          </div>
+          <div class="stop cat-nature">
+            <div class="stop-time">14:00</div>
+            <div class="stop-rail"><div class="stop-dot"></div><div class="stop-line"></div></div>
+            <div class="stop-body">
+              <div class="stop-name-row"><span class="stop-name">中文大浦柱狀節理帶</span><span class="stop-kr">중문 대포 주상절리대</span><span class="tag">自然</span></div>
+              <div class="stop-desc">六角柱狀玄武岩海岸，濟州火山地形的代表景觀，傍晚光線最好看。今天的兩個固定景點之一。</div>
+              <div class="stop-addrs">
+                <a class="addr-link" data-navq="중문대포주상절리대" href="#" target="_blank" rel="noopener"><svg class="pin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">西歸浦市 離於島路 120-73</span></a>
+              </div>
+            </div>
+          </div>
+          <div class="stop cat-food is-choice">
+            <div class="stop-time">18:00</div>
+            <div class="stop-rail"><div class="stop-dot"></div></div>
+            <div class="stop-body">
+              <div class="stop-name-row"><span class="stop-name">晚餐・黑豬肉</span><span class="choice-flag">擇一</span></div>
+              <div class="stop-desc">三間都在西歸浦市區，看想要哪種氣氛：海景、市場旁、還是中文附近的熟成黑豬肉：</div>
+              <div class="option-grid">
+                <div class="option-card">
+                  <div class="option-name">看著大海的豬</div>
+                  <div class="option-note">바다를본돼지・西歸浦海景黑豬肉，邊看海邊吃烤肉</div>
+                  <a class="addr-link" data-navq="바다를본돼지 서귀포점" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">西歸浦市 七十里路 123</span></a>
+                </div>
+                <div class="option-card">
+                  <div class="option-name">黑豬肉海鮮三合</div>
+                  <div class="option-note">就在每日偶來市場旁・海鮮＋黑豬肉三合一套餐</div>
+                  <a class="addr-link" data-navq="흑돼지해물삼합" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">西歸浦市 太平路482街 50</span></a>
+                </div>
+                <div class="option-card">
+                  <div class="option-name">Yolda</div>
+                  <div class="option-note">욜다・熟成黑豬肉專門店，包廂用餐，離中文很近</div>
+                  <a class="addr-link" data-navq="욜다 색달동" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">西歸浦市 色達中央路 192 1樓</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="day-note"><strong>時間充裕再加：</strong>柑橘博物館（신효동，親子景點，大浦柱狀節理帶車程 5 分鐘，展示濟州柑橘文化，約 40 分鐘，地址未查證，建議現場用 Naver Map 搜「柑橘類博物館」）。</div>
+      </div>
+      <div class="panel-nav">
+        <button class="nav-btn" data-day="day1"><span class="nb-label">◂ 上一天</span><span class="nb-title">DAY 1・10/27</span></button>
+        <button class="nav-btn next" data-day="day3"><span class="nb-label">下一天</span><span class="nb-title">DAY 3・10/29 ▸</span></button>
+      </div>
+    </div>
+
+    <!-- DAY 3 -->
+    <div class="day-panel" id="day3" role="tabpanel" hidden>
+      <div class="day-card">
+        <div class="day-head">
+          <div class="day-head-left">
+            <span class="day-num">DAY 3</span>
+            <span class="day-date">10/29（四）</span>
+            <span class="day-theme">安德面西部美景圈</span>
+          </div>
+          <span class="region-badge region-anduk">西南｜安德面</span>
+        </div>
+        <div class="day-map-wrap">
+          <div class="day-map" id="map-day3"></div>
+          <div class="map-legend">
+                <span><i style="background:#6b6458"></i>機場</span>
+                <span><i style="background:#2B2724"></i>住宿</span>
+                <span><i style="background:#1B6E62"></i>自然</span>
+                <span><i style="background:#D9701F"></i>咖啡</span>
+                <span><i style="background:#A8452A"></i>美食</span>
+                <span><i style="background:#5C5473"></i>文化</span>
+              </div>
+        </div>
+        <div class="timeline">
+          <div class="stop cat-cafe">
+            <div class="stop-time">09:30</div>
+            <div class="stop-rail"><div class="stop-dot"></div><div class="stop-line"></div></div>
+            <div class="stop-body">
+              <div class="stop-name-row"><span class="stop-name">Osulloc 茶博物館＋悅詩風吟濟州之家</span><span class="stop-kr">오설록・이니스프리 제주하우스</span><span class="tag">咖啡</span></div>
+              <div class="stop-desc">整片綠茶田加茶香甜點，是行程裡最好拍的一站，建議早一點去人少。</div>
+              <div class="stop-addrs">
+                <a class="addr-link" data-navq="오설록 티뮤지엄" href="#" target="_blank" rel="noopener"><svg class="pin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">Osulloc・西歸浦市 安德面 神話歷史路 15</span></a>
+                <a class="addr-link" data-navq="이니스프리 제주하우스" href="#" target="_blank" rel="noopener"><svg class="pin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">悅詩風吟・西歸浦市 安德面 神話歷史路 23</span></a>
+              </div>
+            </div>
+          </div>
+          <div class="stop cat-nature is-choice">
+            <div class="stop-time">11:00</div>
+            <div class="stop-rail"><div class="stop-dot"></div><div class="stop-line"></div></div>
+            <div class="stop-body">
+              <div class="stop-name-row"><span class="stop-name">花園景點</span><span class="choice-flag">擇一</span></div>
+              <div class="stop-desc">同一區塊的兩個花園型景點，看想賞花還是看貓，選一個安排 1.5–2 小時：</div>
+              <div class="option-grid">
+                <div class="option-card">
+                  <div class="option-name">Camellia Hill 花園</div>
+                  <div class="option-note">카멜리아힐・十月底正值波斯菊與秋花季節，園區腹地大，適合慢慢逛。旁邊還有「山陽大池」산양큰못，同村開車 3 分鐘，池水倒映很好拍，時間夠可以順路加 15 分鐘（Naver Map 查不到，建議到 Camellia Hill 後現場搜尋或問當地人）</div>
+                  <a class="addr-link" data-navq="카멜리아힐" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">西歸浦市 安德面 病岳路 166</span></a>
+                </div>
+                <div class="option-card">
+                  <div class="option-name">Dolcori Forest 貓咪森林樂園</div>
+                  <div class="option-note">돌코리숲・2026 年新開幕，1.8 萬坪貓咪主題花園＋藝術展演＋野餐區，週二公休（這天週四不受影響）。門票約 ₩19,000/人起，室內外都逛要抓 2–3 小時，比 Camellia Hill 花時間</div>
+                  <a class="addr-link" data-navq="돌코리숲" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">西歸浦市 安德面 中山間西路 1878</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="stop cat-nature">
+            <div class="stop-time">14:00</div>
+            <div class="stop-rail"><div class="stop-dot"></div><div class="stop-line"></div></div>
+            <div class="stop-body">
+              <div class="stop-name-row"><span class="stop-name">山房山＋龍頭海岸</span><span class="stop-kr">산방산・용머리해안</span><span class="tag">自然</span></div>
+              <div class="stop-desc">午餐後前往，山房山下的奇岩海岸線很有電影感，退潮時段最好走。今天的兩個固定景點之一。</div>
+              <div class="stop-addrs">
+                <a class="addr-link" data-navq="산방산" href="#" target="_blank" rel="noopener"><svg class="pin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">山房山・西歸浦市 安德面 山房路 218-10</span></a>
+                <a class="addr-link" data-navq="용머리해안" href="#" target="_blank" rel="noopener"><svg class="pin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">龍頭海岸・西歸浦市 安德面 沙溪里 112-3</span></a>
+              </div>
+            </div>
+          </div>
+          <div class="stop cat-culture">
+            <div class="stop-time">16:00</div>
+            <div class="stop-rail"><div class="stop-dot"></div></div>
+            <div class="stop-body">
+              <div class="stop-name-row"><span class="stop-name">濟州神話世界</span><span class="stop-kr">제주신화월드</span><span class="tag">樂園／購物</span></div>
+              <div class="stop-desc">主題樂園＋Premium Outlet 都在同一區，晚餐也可以直接在園內解決。園區裡也有 Momo Zoo 動物園，帶小朋友或喜歡動物可以順道排進去。今天的兩個固定景點之一。</div>
+              <div class="stop-addrs">
+                <a class="addr-link" data-navq="제주신화월드" href="#" target="_blank" rel="noopener"><svg class="pin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">西歸浦市 安德面 神話歷史路304街 38</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel-nav">
+        <button class="nav-btn" data-day="day2"><span class="nb-label">◂ 上一天</span><span class="nb-title">DAY 2・10/28</span></button>
+        <button class="nav-btn next" data-day="day4"><span class="nb-label">下一天</span><span class="nb-title">DAY 4・10/30 ▸</span></button>
+      </div>
+    </div>
+
+    <!-- DAY 4 -->
+    <div class="day-panel" id="day4" role="tabpanel" hidden>
+      <div class="day-card">
+        <div class="day-head">
+          <div class="day-head-left">
+            <span class="day-num">DAY 4</span>
+            <span class="day-date">10/30（五）</span>
+            <span class="day-theme">移動日・1100 高地賞楓北上</span>
+          </div>
+          <span class="region-badge region-move">移動｜中文 → 北村</span>
+        </div>
+        <div class="day-map-wrap">
+          <div class="day-map" id="map-day4"></div>
+          <div class="map-legend">
+                <span><i style="background:#6b6458"></i>機場</span>
+                <span><i style="background:#2B2724"></i>住宿</span>
+                <span><i style="background:#1B6E62"></i>自然</span>
+                <span><i style="background:#D9701F"></i>咖啡</span>
+                <span><i style="background:#A8452A"></i>美食</span>
+                <span><i style="background:#5C5473"></i>文化</span>
+              </div>
+        </div>
+        <div class="timeline">
+          <div class="stop cat-food">
+            <div class="stop-time">10:00</div>
+            <div class="stop-rail"><div class="stop-dot"></div><div class="stop-line"></div></div>
+            <div class="stop-body">
+              <div class="stop-name-row"><span class="stop-name">預禮洞民宿退房</span><span class="tag">交通</span></div>
+              <div class="stop-desc">今天走 1100 道路跨島北上，行李先收好放車上。</div>
+              <div class="stop-addrs">
+                <a class="addr-link" data-navq="서귀포시 역로40번길 18" href="#" target="_blank" rel="noopener"><svg class="pin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">西歸浦市 驛路40番街 18</span></a>
+              </div>
+            </div>
+          </div>
+          <div class="stop cat-nature">
+            <div class="stop-time">10:30</div>
+            <div class="stop-rail"><div class="stop-dot"></div><div class="stop-line"></div></div>
+            <div class="stop-body">
+              <div class="stop-name-row"><span class="stop-name">1100 道路賞楓＋1100 高地濕地</span><span class="stop-kr">1100도로・1100고지</span><span class="tag">自然</span></div>
+              <div class="stop-desc">濟州最知名的楓葉公路，10 月底正是變色期，沿途就在漢拏山國立公園範圍內；高地濕地有短程木棧道，30 分鐘輕鬆走完。</div>
+              <div class="stop-addrs">
+                <a class="addr-link" data-navq="1100고지 휴게소" href="#" target="_blank" rel="noopener"><svg class="pin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">西歸浦市 1100路 1555</span></a>
+              </div>
+            </div>
+          </div>
+          <div class="stop cat-food is-choice">
+            <div class="stop-time">13:00</div>
+            <div class="stop-rail"><div class="stop-dot"></div><div class="stop-line"></div></div>
+            <div class="stop-body">
+              <div class="stop-name-row"><span class="stop-name">午餐・咸德一帶</span><span class="choice-flag">擇一</span></div>
+              <div class="stop-desc">下山後先進到咸德／朝天，這兩個都在附近：</div>
+              <div class="option-grid">
+                <div class="option-card">
+                  <div class="option-name">濟州倫敦貝果博物館</div>
+                  <div class="option-note">超人氣貝果店，很好拍，但排隊常常要 2–3 小時，時間抓不準就別選這個</div>
+                  <a class="addr-link" data-navq="런던베이글뮤지엄 제주점" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">濟州市 舊左邑 東福路 85</span></a>
+                </div>
+                <div class="option-card">
+                  <div class="option-name">Cafe the Container</div>
+                  <div class="option-note">咸德海邊貨櫃風咖啡廳，不太用等，趕時間選這個比較保險</div>
+                  <a class="addr-link" data-navq="카페 더 콘테나" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">濟州市 朝天邑 咸臥路 513</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="stop cat-nature">
+            <div class="stop-time">14:30</div>
+            <div class="stop-rail"><div class="stop-dot"></div><div class="stop-line"></div></div>
+            <div class="stop-body">
+              <div class="stop-name-row"><span class="stop-name">咸德海水浴場＋瑞牛峰</span><span class="stop-kr">함덕해수욕장・서우봉</span><span class="tag">健行</span></div>
+              <div class="stop-desc">先在咸德海邊放鬆，再上瑞牛峰走一小段看夕陽海景。</div>
+              <div class="stop-addrs">
+                <a class="addr-link" data-navq="함덕해수욕장" href="#" target="_blank" rel="noopener"><svg class="pin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">咸德海水浴場・濟州市 朝天邑 朝咸海岸路 519-10</span></a>
+                <a class="addr-link" data-navq="서우봉" href="#" target="_blank" rel="noopener"><svg class="pin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">瑞牛峰・濟州市 朝天邑 咸德里 169-1</span></a>
+              </div>
+            </div>
+          </div>
+          <div class="stop cat-food">
+            <div class="stop-time">17:00</div>
+            <div class="stop-rail"><div class="stop-dot"></div></div>
+            <div class="stop-body">
+              <div class="stop-name-row"><span class="stop-name">入住北村民宿</span><span class="tag">住宿</span></div>
+              <div class="stop-desc">check-in 後在村子附近吃晚餐，明天是牛島＋東部行程重頭戲，早點休息。</div>
+              <div class="stop-addrs">
+                <a class="addr-link" data-navq="제주시 조천읍 북촌북길 58-7" href="#" target="_blank" rel="noopener"><svg class="pin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">濟州市 朝天邑 北村北路 58-7</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="day-note"><strong>時間充裕再加：</strong>山君不離（산굼부리，火山口景觀，在朝天邑內陸，來回會多花 40 分鐘左右，行程滿的話建議跳過）。</div>
+        <div class="day-note"><strong>想順路逛免稅店：</strong>1100 道路下山後會先接近新濟州（노형／연동），如果想在這天繞去蓮洞商圈或樂天免稅店，可以插在 1100 高地和咸德午餐中間，但會讓下午行程更趕，建議先跟朋友抓好可接受的延後時間再決定；不繞的話，逛街主力就是 Day 5 晚上（見行程表 Day 5 備註）。</div>
+      </div>
+      <div class="panel-nav">
+        <button class="nav-btn" data-day="day3"><span class="nb-label">◂ 上一天</span><span class="nb-title">DAY 3・10/29</span></button>
+        <button class="nav-btn next" data-day="day5"><span class="nb-label">下一天</span><span class="nb-title">DAY 5・10/31 ▸</span></button>
+      </div>
+    </div>
+
+    <!-- DAY 5 -->
+    <div class="day-panel" id="day5" role="tabpanel" hidden>
+      <div class="day-card">
+        <div class="day-head">
+          <div class="day-head-left">
+            <span class="day-num">DAY 5</span>
+            <span class="day-date">10/31（六）</span>
+            <span class="day-theme">城山日出峰＋牛島半日遊</span>
+          </div>
+          <span class="region-badge region-east">東部｜城山・牛島</span>
+        </div>
+        <div class="day-map-wrap">
+          <div class="day-map" id="map-day5"></div>
+          <div class="map-legend">
+                <span><i style="background:#6b6458"></i>機場</span>
+                <span><i style="background:#2B2724"></i>住宿</span>
+                <span><i style="background:#1B6E62"></i>自然</span>
+                <span><i style="background:#D9701F"></i>咖啡</span>
+                <span><i style="background:#A8452A"></i>美食</span>
+                <span><i style="background:#5C5473"></i>文化</span>
+              </div>
+        </div>
+        <div class="timeline">
+          <div class="stop cat-nature">
+            <div class="stop-time">08:00</div>
+            <div class="stop-rail"><div class="stop-dot"></div><div class="stop-line"></div></div>
+            <div class="stop-body">
+              <div class="stop-name-row"><span class="stop-name">城山日出峰</span><span class="stop-kr">성산일출봉</span><span class="tag">健行</span></div>
+              <div class="stop-desc">今天行程滿，建議提早出發，來回約 1 小時，也能避開遊覽車人潮。</div>
+              <div class="stop-addrs">
+                <a class="addr-link" data-navq="성산일출봉" href="#" target="_blank" rel="noopener"><svg class="pin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">西歸浦市 城山邑 日出路 284-12</span></a>
+              </div>
+            </div>
+          </div>
+          <div class="stop cat-nature">
+            <div class="stop-time">10:00</div>
+            <div class="stop-rail"><div class="stop-dot"></div><div class="stop-line"></div></div>
+            <div class="stop-body">
+              <div class="stop-name-row"><span class="stop-name">城山港搭渡輪往牛島</span><span class="stop-kr">성산항 → 우도</span><span class="tag">交通</span></div>
+              <div class="stop-desc">船程約 15 分鐘，登船前把停車位置和回程船班時間先記好。</div>
+              <div class="stop-addrs">
+                <a class="addr-link" data-navq="성산항" href="#" target="_blank" rel="noopener"><svg class="pin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">西歸浦市 城山邑 城山登龍路 129-21</span></a>
+              </div>
+            </div>
+          </div>
+          <div class="stop cat-nature">
+            <div class="stop-time">10:30</div>
+            <div class="stop-rail"><div class="stop-dot"></div><div class="stop-line"></div></div>
+            <div class="stop-body">
+              <div class="stop-name-row"><span class="stop-name">牛島半日遊（租電動車環島）</span><span class="stop-kr">우도</span><span class="tag">自然</span></div>
+              <div class="stop-desc">你 PDF 清單裡最大一塊就是牛島，整理成環島路上會經過的幾個重點，時間抓 3.5–4 小時：</div>
+              <div class="stop-addrs">
+                <a class="addr-link" data-navq="우도봉" href="#" target="_blank" rel="noopener"><svg class="pin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">牛島峰景觀台・濟州市 牛島面 牛島峰街 105</span></a>
+                <a class="addr-link" data-navq="하고수동해수욕장" href="#" target="_blank" rel="noopener"><svg class="pin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">하고수동海邊・濟州市 牛島面 延坪里</span></a>
+                <a class="addr-link" data-navq="우도바당땅콩영농조합법인" href="#" target="_blank" rel="noopener"><svg class="pin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">牛島花生農場（伴手禮）・濟州市 牛島面 牛島海岸街 1014</span></a>
+              </div>
+            </div>
+          </div>
+          <div class="stop cat-food is-choice">
+            <div class="stop-time">12:00</div>
+            <div class="stop-rail"><div class="stop-dot"></div><div class="stop-line"></div></div>
+            <div class="stop-body">
+              <div class="stop-name-row"><span class="stop-name">牛島午餐</span><span class="choice-flag">擇一</span></div>
+              <div class="stop-desc">你清單裡牛島餐廳選項很多，挑四個代表性的：</div>
+              <div class="option-grid">
+                <div class="option-card">
+                  <div class="option-name">Udo Haenyeo Sikdang</div>
+                  <div class="option-note">해녀식당・海女直營，海鮮鍋類為主</div>
+                  <a class="addr-link" data-navq="우도해녀식당" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">牛島海岸街 440</span></a>
+                </div>
+                <div class="option-card">
+                  <div class="option-name">안녕육지사람 2호점</div>
+                  <div class="option-note">牛島知名漢堡店，快餐取向，適合節省時間</div>
+                  <a class="addr-link" data-navq="안녕육지사람 두번째이야기점" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">牛島海岸街 802</span></a>
+                </div>
+                <div class="option-card">
+                  <div class="option-name">小鮑魚餐廳</div>
+                  <div class="option-note">소섬전복・主打鮑魚料理，喜歡海味濃一點可以選這間</div>
+                  <a class="addr-link" data-navq="소섬전복" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">牛島海岸街 1158</span></a>
+                </div>
+                <div class="option-card">
+                  <div class="option-name">風源</div>
+                  <div class="option-note">풍원・招牌漢拿山炒飯，店員會桌邊拌炒還會順便講解由來</div>
+                  <a class="addr-link" data-navq="우도 풍원" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">牛島海岸街 780-2</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="stop cat-cafe is-choice">
+            <div class="stop-time">13:15</div>
+            <div class="stop-rail"><div class="stop-dot"></div><div class="stop-line"></div></div>
+            <div class="stop-body">
+              <div class="stop-name-row"><span class="stop-name">牛島甜點／伴手禮</span><span class="choice-flag">擇一</span></div>
+              <div class="stop-desc">飯後在回程碼頭前找地方休息一下：</div>
+              <div class="option-grid">
+                <div class="option-card">
+                  <div class="option-name">Udo Garden</div>
+                  <div class="option-note">海景咖啡廳，適合坐下來休息拍照</div>
+                  <a class="addr-link" data-navq="우도정원" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">牛島面 延坪里 1964</span></a>
+                </div>
+                <div class="option-card">
+                  <div class="option-name">哈哈呵呵漢堡｜黑豬肉花生漢堡</div>
+                  <div class="option-note">牛島招牌花生黑豬肉漢堡，邊走邊吃 type</div>
+                  <a class="addr-link" data-navq="하하호호" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">牛島海岸街 532</span></a>
+                </div>
+                <div class="option-card">
+                  <div class="option-name">Cafe Bat 318</div>
+                  <div class="option-note">牛島在地咖啡廳，環境安靜，適合喜歡人少一點的話可以選這間</div>
+                  <a class="addr-link" data-navq="제주 제주시 우도면 연평리 318" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">牛島面 延坪里 318 1樓</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="stop cat-nature">
+            <div class="stop-time">14:00</div>
+            <div class="stop-rail"><div class="stop-dot"></div><div class="stop-line"></div></div>
+            <div class="stop-body">
+              <div class="stop-name-row"><span class="stop-name">渡輪返回城山港</span><span class="tag">交通</span></div>
+              <div class="stop-desc">回到本島取車，繼續下午的行程。</div>
+            </div>
+          </div>
+          <div class="stop cat-nature is-choice">
+            <div class="stop-time">14:30</div>
+            <div class="stop-rail"><div class="stop-dot"></div><div class="stop-line"></div></div>
+            <div class="stop-body">
+              <div class="stop-name-row"><span class="stop-name">要不要順遊涉地可支</span><span class="choice-flag">擇一</span></div>
+              <div class="stop-desc">今天行程已經很滿（城山日出峰＋牛島是兩個固定景點），看體力決定要不要再加這一站：</div>
+              <div class="option-grid">
+                <div class="option-card">
+                  <div class="option-name">涉地可支</div>
+                  <div class="option-note">섭지코지・離城山港很近，海岸步道加燈塔，天氣好能遠眺日出峰，很好拍團體照，約 40–50 分鐘</div>
+                  <a class="addr-link" data-navq="섭지코지" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">西歸浦市 城山邑 涉地可支路 107</span></a>
+                </div>
+                <div class="option-card">
+                  <div class="option-name">跳過，直接去月汀里休息</div>
+                  <div class="option-note">體力不夠或想早點放鬆的話，跳過這站直接到月汀里海邊咖啡街，多留一點時間喝咖啡看海</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="stop cat-cafe">
+            <div class="stop-time">15:30</div>
+            <div class="stop-rail"><div class="stop-dot"></div><div class="stop-line"></div></div>
+            <div class="stop-body">
+              <div class="stop-name-row"><span class="stop-name">月汀里海邊咖啡街</span><span class="stop-kr">월정리해변</span><span class="tag">咖啡</span></div>
+              <div class="stop-desc">一整排海景咖啡廳，適合放慢腳步喝杯咖啡，休息一下再開回市區。</div>
+              <div class="stop-addrs">
+                <a class="addr-link" data-navq="월정리해변" href="#" target="_blank" rel="noopener"><svg class="pin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">濟州市 舊左邑 月汀里</span></a>
+              </div>
+            </div>
+          </div>
+          <div class="stop cat-food is-choice">
+            <div class="stop-time">18:00</div>
+            <div class="stop-rail"><div class="stop-dot"></div></div>
+            <div class="stop-body">
+              <div class="stop-name-row"><span class="stop-name">晚餐地點</span><span class="choice-flag">擇一</span></div>
+              <div class="stop-desc">今天行程已經很滿，晚餐建議先決定要不要開回濟州市，兩個方向都可以：</div>
+              <div class="option-grid">
+                <div class="option-card">
+                  <div class="option-name">留在城山當地</div>
+                  <div class="option-note">不用再多開 1 小時車</div>
+                  <div class="option-grid">
+                    <div class="option-card">
+                      <div class="option-name">Mr. Blessed briquette grill</div>
+                      <div class="option-note">복자씨연탄구이・炭火燒烤</div>
+                      <a class="addr-link" data-navq="복자씨연탄구이" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">城山邑 迎日海岸路 2764</span></a>
+                    </div>
+                    <div class="option-card">
+                      <div class="option-name">성산봄죽칼국수 성산점</div>
+                      <div class="option-note">南瓜刀切麵，輕食一點</div>
+                      <a class="addr-link" data-navq="성산봄죽칼국수 성산점" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">城山邑 迎日海岸路 2725</span></a>
+                    </div>
+                    <div class="option-card">
+                      <div class="option-name">House of Divers White Flag</div>
+                      <div class="option-note">하우스오브다이버스 화이트플래그・海女直營海景海鮮餐廳，離日出峰很近</div>
+                      <a class="addr-link" data-navq="하우스오브다이버스 화이트플래그" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">西歸浦市 城山邑一帶（確切門牌未查到，用店名搜尋即可定位）</span></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="option-card">
+                  <div class="option-name">開回濟州市（約 1 小時）</div>
+                  <div class="option-note">東門市場夜市＋七星購物街＋中央地下街，濟州市老城區逛街精華，彼此都在步行範圍</div>
+                  <a class="addr-link" data-navq="제주동문시장" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">東門市場・濟州市 觀德路14街 20</span></a>
+                  <a class="addr-link" data-navq="칠성로" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">七星購物街・濟州市 觀德路13街 12</span></a>
+                  <a class="addr-link" data-navq="제주 중앙지하상가" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">中央地下街・濟州市 中央路 地下 60</span></a>
+                  <div class="option-grid">
+                    <div class="option-card">
+                      <div class="option-name">菜板豚</div>
+                      <div class="option-note">돔베돈・黑豬肉一條街人氣店</div>
+                      <a class="addr-link" data-navq="돔베돈" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">觀德路15街 25</span></a>
+                    </div>
+                    <div class="option-card">
+                      <div class="option-name">豚舍豚</div>
+                      <div class="option-note">돈사돈 본관・黑豬肉一條街人氣店</div>
+                      <a class="addr-link" data-navq="돈사돈 본관" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">友坪路 19</span></a>
+                    </div>
+                    <div class="option-card">
+                      <div class="option-name">濟州本館黑豬肉烤肉店</div>
+                      <div class="option-note">黑豬肉一條街人氣店</div>
+                      <div class="addr-unknown">查不到確切地址，建議到黑豬肉一條街現場找招牌。</div>
+                    </div>
+                  </div>
+                  <div class="option-note" style="margin-top:8px;">還想再逛：蓮洞商圈（누웨마루거리）＋樂天免稅店在新濟州，離老城區約車程 10–15 分鐘，體力夠再續攤：</div>
+                  <a class="addr-link" data-navq="누웨마루거리" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">蓮洞商圈（누웨마루거리）・濟州市 蓮洞</span></a>
+                  <a class="addr-link" data-navq="롯데면세점 제주점" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">樂天免稅店 濟州店・濟州市 道令路 83</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="day-note"><strong>行程偏滿的取捨：</strong>萬丈窟和濟州鐵路公園（구좌，租借式軌道車）這次先沒排進來，牛島＋城山已經是完整一天。如果實際玩起來覺得時間夠，可以拿掉月汀里咖啡街換萬丈窟，或直接把晚餐選「留在城山」省下的車程拿去補這兩個點。城山當地咖啡備案：orrrn（오조리）、COCOMAMA（성산점），地址未查證，不想再往月汀里跑的話可以現場搜這兩間代替。</div>
+        <div class="day-note"><strong>逛街提醒：</strong>老城區（東門市場／七星路／中央地下街）跟新濟州（蓮洞商圈／免稅店）是濟州市裡兩個不同區域，中間隔約 10–15 分鐘車程，不是走路可以互通。這趟行程真正會進濟州市區的只有這個晚上（Day 1–3 住宿在中文一帶偏南，Day 6 一早退房要還車＋報到，時間都排不出逛街空檔）：如果晚餐選「開回濟州市」，可以順路一次逛完老城區＋新濟州；如果選「留在城山」，這趟就不會進市區，逛街／免稅店只能挪到 Day 4（1100 道路下山後會經過濟州市外圍，往北村前可以繞進去，但會讓當天更趕，需要抓車程餘裕）。</div>
+      </div>
+      <div class="panel-nav">
+        <button class="nav-btn" data-day="day4"><span class="nb-label">◂ 上一天</span><span class="nb-title">DAY 4・10/30</span></button>
+        <button class="nav-btn next" data-day="day6"><span class="nb-label">下一天</span><span class="nb-title">DAY 6・11/01 ▸</span></button>
+      </div>
+    </div>
+
+    <!-- DAY 6 -->
+    <div class="day-panel" id="day6" role="tabpanel" hidden>
+      <div class="day-card">
+        <div class="day-head">
+          <div class="day-head-left">
+            <span class="day-num">DAY 6</span>
+            <span class="day-date">11/01（日）</span>
+            <span class="day-theme">賦歸</span>
+          </div>
+          <span class="region-badge region-fly">機場</span>
+        </div>
+        <div class="day-map-wrap">
+          <div class="day-map" id="map-day6"></div>
+          <div class="map-legend">
+                <span><i style="background:#6b6458"></i>機場</span>
+                <span><i style="background:#2B2724"></i>住宿</span>
+                <span><i style="background:#1B6E62"></i>自然</span>
+                <span><i style="background:#D9701F"></i>咖啡</span>
+                <span><i style="background:#A8452A"></i>美食</span>
+                <span><i style="background:#5C5473"></i>文化</span>
+              </div>
+        </div>
+        <div class="timeline">
+          <div class="stop cat-food">
+            <div class="stop-time">07:00</div>
+            <div class="stop-rail"><div class="stop-dot"></div><div class="stop-line"></div></div>
+            <div class="stop-body">
+              <div class="stop-name-row"><span class="stop-name">北村民宿退房</span><span class="tag">交通</span></div>
+              <div class="stop-desc">今天多排了兩站，提早一點出發，北村距機場車程約 30–40 分鐘。</div>
+              <div class="stop-addrs">
+                <a class="addr-link" data-navq="제주시 조천읍 북촌북길 58-7" href="#" target="_blank" rel="noopener"><svg class="pin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">濟州市 朝天邑 北村北路 58-7</span></a>
+              </div>
+            </div>
+          </div>
+          <div class="stop cat-nature">
+            <div class="stop-time">07:45</div>
+            <div class="stop-rail"><div class="stop-dot"></div><div class="stop-line"></div></div>
+            <div class="stop-body">
+              <div class="stop-name-row"><span class="stop-name">彩虹海岸</span><span class="stop-kr">도두동 무지개해안도로</span><span class="tag">自然</span></div>
+              <div class="stop-desc">就在機場旁邊的道頭洞，彩色海堤很好拍，停留 15 分鐘剛好。</div>
+              <div class="stop-addrs">
+                <a class="addr-link" data-navq="도두동 무지개해안도로" href="#" target="_blank" rel="noopener"><svg class="pin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">濟州市 西海岸路 232</span></a>
+              </div>
+            </div>
+          </div>
+          <div class="stop cat-food">
+            <div class="stop-time">08:05</div>
+            <div class="stop-rail"><div class="stop-dot"></div><div class="stop-line"></div></div>
+            <div class="stop-body">
+              <div class="stop-name-row"><span class="stop-name">Waboda（早餐）</span><span class="tag">美食</span></div>
+              <div class="stop-desc">機場周邊的麵包咖啡店，外帶也方便，時間緊的最後一餐選這個比較保險。</div>
+              <div class="stop-addrs">
+                <a class="addr-link" data-navq="와보다" href="#" target="_blank" rel="noopener"><svg class="pin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">濟州市 西海岸路 560</span></a>
+              </div>
+            </div>
+          </div>
+          <div class="stop cat-nature">
+            <div class="stop-time">08:30</div>
+            <div class="stop-rail"><div class="stop-dot"></div><div class="stop-line"></div></div>
+            <div class="stop-body">
+              <div class="stop-name-row"><span class="stop-name">還車＋機場報到</span><span class="tag">交通</span></div>
+              <div class="stop-desc">還車前記得加滿油、再次拍照確認車況，交還鑰匙後直接前往報到櫃檯。</div>
+              <div class="stop-addrs">
+                <a class="addr-link" data-navq="제주국제공항" href="#" target="_blank" rel="noopener"><svg class="pin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">濟州市 空港路 2</span></a>
+              </div>
+            </div>
+          </div>
+          <div class="stop cat-food">
+            <div class="stop-time">10:50</div>
+            <div class="stop-rail"><div class="stop-dot"></div></div>
+            <div class="stop-body">
+              <div class="stop-name-row"><span class="stop-name">CJU 起飛 → 12:10 抵達 TPE</span><span class="tag">交通</span></div>
+              <div class="stop-desc">臺灣虎航 IT655，順利賦歸，結束五夜六日的濟州自駕行。</div>
+            </div>
+          </div>
+        </div>
+        <div class="day-note"><strong>備案：</strong>如果班機延後或想吃正式一點的早餐，熟成到老衡本館（숙성도 노형본관，濟州市 元老衡路 41）離機場約 15 分鐘，可以取代 Waboda。</div>
+      </div>
+      <div class="panel-nav">
+        <button class="nav-btn" data-day="day5"><span class="nb-label">◂ 上一天</span><span class="nb-title">DAY 5・10/31</span></button>
+        <button class="nav-btn next" data-jump="checklist"><span class="nb-label">下一頁</span><span class="nb-title">行前準備 ▸</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 3: 清單 -->
+  <section class="panel" id="checklist" role="tabpanel" hidden>
+    <div class="page-title">
+      <h2>行前準備清單</h2>
+      <div class="page-sub">出發前該辦的證件、下載的 App、該帶的裝備</div>
+    </div>
+
+    <div class="prep-grid">
+      <div class="prep-col">
+        <h3>證件與租車</h3>
+        <ul class="prep-list">
+          <li><strong>護照正本</strong>・全程隨身攜帶</li>
+          <li><strong>台灣駕照正本＋國際駕照</strong>・建議出發前 1–2 週至監理站申請國際駕照，兩本都要帶，缺一不可</li>
+          <li><strong>信用卡</strong>・租車付款與押金用</li>
+          <li><strong>取車五重點</strong>・外觀刮痕、輪胎、冷氣燈光雨刷、油量、GPS，全部拍照存證</li>
+          <li><strong>保險</strong>・建議加保免責補償險（CDW），四人行李多可選中型 SUV 或休旅車</li>
+        </ul>
+      </div>
+      <div class="prep-col">
+        <h3>行動與裝備</h3>
+        <ul class="prep-list">
+          <li><strong>Naver Map App</strong>・先下載好，行程表裡每個地址都可以直接點開 Naver Map 導航，比 Google Map 準確</li>
+          <li><strong>停車零錢／WOWPASS 卡</strong>・部分停車場需自助繳費</li>
+          <li><strong>防風保暖外套</strong>・10 月底濟州早晚溫差大，山區與海邊風更明顯，建議洋蔥式穿搭</li>
+          <li><strong>輕便雨具</strong>・山區天氣多變，1100 高地與日出峰尤其容易起風起霧</li>
+          <li><strong>轉接頭／行動電源</strong>・韓國為 220V C/F 型插座</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="review-box">
+      <h3>你的去趣行程 PDF，比對結果</h3>
+      <div class="review-sub">61 個項目已經照地點分別排進 DAY 1–6，重複的（彩虹海岸、七星購物街、orrrn 等）已合併只留一次。目前只有以下兩項建議捨棄，其餘（包含一開始查不到位置的 5 家店）都已確認地址並排進對應天數：</div>
+      <div class="review-grid">
+        <div>
+          <span class="review-col-title drop">建議捨棄</span>
+          <ul class="review-list">
+            <li><strong>三姓穴海鮮湯</strong>・位於濟州市延洞（新市區），離所有行程路線都太遠，會多繞一趟</li>
+            <li><strong>Canola Field 油菜花田</strong>・濟州油菜花季在 3–4 月，10 月底去是光禿禿的田，這次先不排</li>
+          </ul>
+        </div>
+      </div>
+      <div class="day-note" style="margin:16px 0 0;"><strong>已補上：</strong>Yolda（Day 2 黑豬肉選項）、黑豬肉海鮮炒飯餐廳／風源（Day 5 牛島午餐選項）、House of divers white flag（Day 5 晚餐「留在城山」選項）、Cafe Bat 318（Day 5 牛島甜點選項，原來在牛島上）。</div>
+    </div>
+
+  </section>
+
+  <!-- PAGE 4: 伴手禮（零食餅乾） -->
+  <section class="panel" id="snacks" role="tabpanel" hidden>
+    <div class="page-title">
+      <h2>伴手禮・零食餅乾</h2>
+      <div class="page-sub">濟州零食餅乾類伴手禮精選，幾個順著行程就能買，不用特地繞路</div>
+    </div>
+
+    <div class="prep-col">
+      <h3>經典必買・到處都找得到</h3>
+      <div class="option-grid">
+        <div class="option-card">
+          <div class="option-name">濟州柑橘巧克力</div>
+          <div class="option-note">귤렛／FRUNACK 等品牌，黑巧克力、白巧克力、優格等口味都有。超市、機場免稅店、東門市場都在賣，看到喜歡的口味先買，不用留到最後一天。</div>
+        </div>
+        <div class="option-card">
+          <div class="option-name">柑橘油蜜果</div>
+          <div class="option-note">類似台灣的爆米香，用柑橘汁、蜂蜜跟米香一起做的，甜而不黏牙。大型超市（樂天마트／이마트）或機場禮品店都有。</div>
+        </div>
+        <div class="option-card">
+          <div class="option-name">Ottogi 黑豬肉風味泡麵</div>
+          <div class="option-note">濟州黑豬肉聯名限定口味，便利商店、超市都買得到，體積小重量輕，當同事朋友的趣味小禮物很剛好。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prep-col" style="margin-top:28px;">
+      <h3>行程路上順便買・不用特地繞路</h3>
+      <div class="option-grid">
+        <div class="option-card">
+          <div class="option-name">Mongle 몽그레 雲朵餅乾</div>
+          <span class="snack-flag">Day 6・機場</span>
+          <div class="option-note">造型像雲朵，酥脆帶奶香，機場店就在濟州機場附近，Day 6 出關前最後補貨剛剛好，不用擔心扛著到處跑。</div>
+          <a class="addr-link" data-navq="몽그레 제주공항점" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">濟州市 道里路 84</span></a>
+        </div>
+        <div class="option-card">
+          <div class="option-name">牛島花生夾心餅乾</div>
+          <span class="snack-flag">Day 5・牛島</span>
+          <div class="option-note">우도샌드・牛島在地花生做的夾心餅乾，也有巧克力口味。Day 5 吃完牛島午餐或甜點時，順路就能帶走，不用另外找時間。</div>
+          <a class="addr-link" data-navq="우도샌드" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">牛島海岸街 780-2</span></a>
+        </div>
+        <div class="option-card">
+          <div class="option-name">城山過子點・日出峰曲奇</div>
+          <span class="snack-flag">Day 5・城山</span>
+          <div class="option-note">성산과자점・日出峰造型手工曲奇，好幾種口味，包裝適合送人。就在성산일출봉旁邊，早上爬完可以順路買。</div>
+          <a class="addr-link" data-navq="성산과자점" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">西歸浦市 城山邑 日出路 286 1樓</span></a>
+        </div>
+        <div class="option-card">
+          <div class="option-name">Osulloc 抹茶餅乾／抹茶巧克力</div>
+          <span class="snack-flag">Day 3・安德面</span>
+          <div class="option-note">濟州綠茶做的餅乾跟巧克力，比外面超市版本濃郁不少。Day 3 逛完茶博物館，出口賣店直接買，比機場划算。</div>
+          <a class="addr-link" data-navq="오설록 티뮤지엄" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">西歸浦市 安德面 神話歷史路 15</span></a>
+        </div>
+        <div class="option-card">
+          <div class="option-name">濟州穀物年糕・年糕麻糬</div>
+          <span class="snack-flag">Day 5・東門市場</span>
+          <div class="option-note">傳統五穀口味，也有紅豆、抹茶內餡的年糕麻糬版本。如果 Day 5 晚餐選「開回濟州市」，在東門市場逛街時順手帶，市場價格比超市划算。</div>
+          <a class="addr-link" data-navq="제주동문시장" href="#" target="_blank" rel="noopener"><svg class="pin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg><span class="addr-text">東門市場・濟州市 觀德路14街 20</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-note" style="margin-top:28px;"><strong>小提醒：</strong>餅乾零食類過海關沒有液體限重問題，多買幾包不用擔心；同一款東西通常超市／市場比機場免稅店便宜，行程路上先買、機場只補剩下沒買到的就好。四個人分著吃，建議大包裝的品項（穀物年糕、泡麵）用團購價一起買比較划算。</div>
+
+    <footer>
+      <span>濟州島秋日自駕行・2026/10/27 – 11/01</span>
+      <span>店家與商品內容可能異動，實際供應以現場為準</span>
+    </footer>
+  </section>
+
+</div>
+
+<nav class="bottom-nav" role="tablist" aria-label="主選單">
+  <button class="bn-btn" role="tab" data-main="flights"><span class="bn-label">航班</span><span class="bn-sub">機票住宿</span></button>
+  <button class="bn-btn" role="tab" data-main="itinerary"><span class="bn-label">行程表</span><span class="bn-sub">6 天行程</span></button>
+  <button class="bn-btn" role="tab" data-main="checklist"><span class="bn-label">清單</span><span class="bn-sub">行前準備</span></button>
+  <button class="bn-btn" role="tab" data-main="snacks"><span class="bn-label">伴手禮</span><span class="bn-sub">零食餅乾</span></button>
+</nav>
+
+<script>
+(function () {
+  var mainPanels = Array.prototype.slice.call(document.querySelectorAll('.panel'));
+  var mainBtns = Array.prototype.slice.call(document.querySelectorAll('.bn-btn'));
+  var dayPanels = Array.prototype.slice.call(document.querySelectorAll('.day-panel'));
+  var dayTabs = Array.prototype.slice.call(document.querySelectorAll('.day-tab'));
+  var dayNavBtns = Array.prototype.slice.call(document.querySelectorAll('.nav-btn[data-day]'));
+  var jumpBtns = Array.prototype.slice.call(document.querySelectorAll('[data-jump]'));
+
+  // Build Naver Map search links from the Korean place-name data attribute.
+  Array.prototype.slice.call(document.querySelectorAll('.addr-link[data-navq]')).forEach(function (a) {
+    var q = a.getAttribute('data-navq');
+    if (q) a.href = 'https://map.naver.com/p/search/' + encodeURIComponent(q);
+  });
+
+  // ---------- Per-day mini map (Leaflet + OpenStreetMap) ----------
+  // Coordinates are approximate (compiled from public map/business listings for this trip's
+  // stops); good enough to see relative distances at a glance, not survey-grade precision.
+  var DAY_MAP_DATA = {"day1": [[33.5113, 126.493, "濟州國際機場", "airport"], [33.393845, 126.239716, "挾才海水浴場", "nature"], [33.387994, 126.239784, "翰林公園（午餐＋遊園）", "nature"], [33.3929, 126.3586, "9.81 Park", "cafe"], [33.3974, 126.3457, "Arte Museum 濟州", "cafe"], [33.4605, 126.311, "해지개카페＋한담해변", "cafe"], [33.25, 126.413, "入住預禮洞民宿", "stay"]], "day2": [[33.5113, 126.493, "濟州國際機場", "airport"], [33.25, 126.413, "住宿：預禮洞民宿", "stay"], [33.2382, 126.5591, "新緣橋＋新島散步", "nature"], [33.244854, 126.5718, "正房瀑布", "nature"], [33.244717, 126.55982, "天地淵瀑布", "nature"], [33.245547, 126.564409, "李仲燮文化街", "culture"], [33.2483, 126.5642, "西歸浦每日偶來市場（午餐）", "food"], [33.2458, 126.4493, "藥泉寺", "culture"], [33.23834, 126.42586, "中文大浦柱狀節理帶", "nature"], [33.2508, 126.568, "看著大海的豬", "food"], [33.2483, 126.5642, "黑豬肉海鮮三合", "food"], [33.246, 126.409, "Yolda", "food"]], "day3": [[33.5113, 126.493, "濟州國際機場", "airport"], [33.25, 126.413, "住宿：預禮洞民宿", "stay"], [33.306, 126.2901, "Osulloc 茶博物館＋悅詩風吟濟州之家", "cafe"], [33.306394, 126.29052, "Osulloc 茶博物館＋悅詩風吟濟州之家", "cafe"], [33.289135, 126.37011, "Camellia Hill 花園", "nature"], [33.2903957, 126.3226207, "Dolcori Forest 貓咪森林樂園", "nature"], [33.2366, 126.3129, "山房山＋龍頭海岸", "nature"], [33.2334, 126.3137, "山房山＋龍頭海岸", "nature"], [33.30526, 126.315216, "濟州神話世界", "culture"]], "day4": [[33.5113, 126.493, "濟州國際機場", "airport"], [33.25, 126.413, "預禮洞民宿退房", "stay"], [33.3399, 126.4368, "1100 道路賞楓＋1100 高地濕地", "nature"], [33.549, 126.711, "濟州倫敦貝果博物館", "food"], [33.487, 126.678, "Cafe the Container", "food"], [33.542726, 126.669089, "咸德海水浴場＋瑞牛峰", "nature"], [33.5344, 126.6342, "咸德海水浴場＋瑞牛峰", "nature"], [33.547, 126.69, "入住北村民宿", "stay"]], "day5": [[33.5113, 126.493, "濟州國際機場", "airport"], [33.547, 126.69, "住宿：北村民宿", "stay"], [33.4621, 126.9364, "城山日出峰", "nature"], [33.4721, 126.9332, "城山港搭渡輪往牛島", "nature"], [33.5043, 126.95405, "牛島半日遊（租電動車環島）", "nature"], [33.514126, 126.958595, "牛島半日遊（租電動車環島）", "nature"], [33.516, 126.96, "牛島半日遊（租電動車環島）", "nature"], [33.514523, 126.94903, "Udo Haenyeo Sikdang", "food"], [33.496, 126.955, "안녕육지사람 2호점", "food"], [33.5013, 126.9508, "小鮑魚餐廳", "food"], [33.50834, 126.94413, "風源", "food"], [33.5, 126.963, "Udo Garden", "cafe"], [33.50332, 126.95568, "哈哈呵呵漢堡｜黑豬肉花生漢堡", "cafe"], [33.496985, 126.968603, "Cafe Bat 318", "cafe"], [33.4237, 126.9296, "涉地可支", "nature"], [33.555809, 126.796624, "月汀里海邊咖啡街", "cafe"], [33.4692, 126.9199, "Mr. Blessed briquette grill", "food"], [33.446, 126.929, "성산봄죽칼국수 성산점", "food"], [33.4739, 126.927, "House of Divers White Flag", "food"], [33.511603, 126.526019, "開回濟州市（約 1 小時）", "food"], [33.514088, 126.526215, "開回濟州市（約 1 小時）", "food"], [33.513174, 126.5247, "開回濟州市（約 1 小時）", "food"], [33.5156, 126.5267, "菜板豚", "food"], [33.4854, 126.4817, "豚舍豚", "food"], [33.487, 126.4899, "開回濟州市（約 1 小時）", "food"], [33.4972, 126.4874, "開回濟州市（約 1 小時）", "food"]], "day6": [[33.547, 126.69, "北村民宿退房", "stay"], [33.4995, 126.463, "彩虹海岸", "nature"], [33.514, 126.499, "Waboda（早餐）", "food"], [33.5113, 126.493, "濟州國際機場", "airport"]]};
+
+  var dayMapInstances = {};
+  function pinIcon(category) {
+    if (typeof L === 'undefined') return null;
+    return L.divIcon({
+      className: '',
+      html: '<span class="map-pin pin-' + category + '"></span>',
+      iconSize: [16, 16],
+      iconAnchor: [8, 8],
+      popupAnchor: [0, -8]
+    });
+  }
+  function ensureDayMap(id) {
+    if (typeof L === 'undefined') return;
+    var data = DAY_MAP_DATA[id];
+    if (!data || !data.length) return;
+    var container = document.getElementById('map-' + id);
+    if (!container || container.offsetParent === null) return; // an ancestor is still hidden; try again later
+    requestAnimationFrame(function () {
+      if (container.offsetParent === null) return;
+      if (!dayMapInstances[id]) {
+        var map = L.map(container, { scrollWheelZoom: false });
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 18,
+          attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+        var bounds = [];
+        data.forEach(function (pt) {
+          var lat = pt[0], lon = pt[1], name = pt[2], cat = pt[3];
+          L.marker([lat, lon], { icon: pinIcon(cat) }).addTo(map).bindPopup(name);
+          bounds.push([lat, lon]);
+        });
+        map.fitBounds(bounds, { padding: [22, 22] });
+        dayMapInstances[id] = map;
+      } else {
+        dayMapInstances[id].invalidateSize();
+      }
+    });
+  }
+  function currentDayId() {
+    var activeTab = document.querySelector('.day-tab.active');
+    return activeTab ? activeTab.dataset.day : 'day1';
+  }
+
+  function activateMain(id, opts) {
+    opts = opts || {};
+    var found = false;
+    mainPanels.forEach(function (p) {
+      var match = p.id === id;
+      if (match) found = true;
+      p.hidden = !match;
+    });
+    if (!found) return;
+    mainBtns.forEach(function (b) {
+      var isActive = b.dataset.main === id;
+      b.classList.toggle('active', isActive);
+      b.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+    if (opts.updateHash !== false) history.replaceState(null, '', '#' + id);
+    if (opts.scrollTop !== false) window.scrollTo({ top: 0, behavior: 'auto' });
+    try { localStorage.setItem('jeju-main-tab', id); } catch (e) {}
+    if (id === 'itinerary') ensureDayMap(currentDayId());
+  }
+
+  function activateDay(id, opts) {
+    opts = opts || {};
+    var found = false;
+    dayPanels.forEach(function (p) {
+      var match = p.id === id;
+      if (match) found = true;
+      p.hidden = !match;
+    });
+    if (!found) return;
+    dayTabs.forEach(function (t) {
+      var isActive = t.dataset.day === id;
+      t.classList.toggle('active', isActive);
+      t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      if (isActive && opts.scrollTabIntoView) t.scrollIntoView({ block: 'nearest', inline: 'center' });
+    });
+    if (opts.scrollTop !== false) window.scrollTo({ top: 0, behavior: 'auto' });
+    try { localStorage.setItem('jeju-day-tab', id); } catch (e) {}
+    ensureDayMap(id);
+  }
+
+  mainBtns.forEach(function (b) {
+    b.addEventListener('click', function () { activateMain(b.dataset.main); });
+  });
+
+  dayTabs.forEach(function (t) {
+    t.addEventListener('click', function () { activateDay(t.dataset.day, { scrollTabIntoView: true }); });
+  });
+
+  dayNavBtns.forEach(function (b) {
+    b.addEventListener('click', function () { activateDay(b.dataset.day, { scrollTabIntoView: true }); });
+  });
+
+  jumpBtns.forEach(function (b) {
+    b.addEventListener('click', function () { activateMain(b.dataset.jump); });
+  });
+
+  window.addEventListener('hashchange', function () {
+    var id = location.hash.replace('#', '');
+    if (id && document.getElementById(id) && document.getElementById(id).classList.contains('panel')) {
+      activateMain(id, { updateHash: false });
+    }
+  });
+
+  var initialMain = 'flights';
+  var hashId = location.hash.replace('#', '');
+  if (hashId && document.getElementById(hashId) && document.getElementById(hashId).classList.contains('panel')) {
+    initialMain = hashId;
+  } else {
+    try {
+      var savedMain = localStorage.getItem('jeju-main-tab');
+      if (savedMain && document.getElementById(savedMain)) initialMain = savedMain;
+    } catch (e) {}
+  }
+
+  var initialDay = 'day1';
+  try {
+    var savedDay = localStorage.getItem('jeju-day-tab');
+    if (savedDay && document.getElementById(savedDay)) initialDay = savedDay;
+  } catch (e) {}
+
+  activateMain(initialMain, { updateHash: false, scrollTop: false });
+  activateDay(initialDay, { scrollTop: false, scrollTabIntoView: true });
+})();
+</script>
+
+</body>
+</html>
